@@ -45,5 +45,13 @@ export default defineConfig({
   ],
   server: {
     open: true,
-  },
+    proxy: {
+      "/api": {
+        target: "http://shipment.fun:3000",
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, '')
+      },
+    },
+    cors: false,
+  }
 });

@@ -5,13 +5,11 @@ import { ListUrls } from '@/constants/urls';
 import { axiosBaseQuery } from '../service';
 import type { TableListDataQueryTypes, TableListDataType } from './types';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 // Define an API slice with endpoints
 export const listApi = createApi({
   reducerPath: 'listApi',
   baseQuery: axiosBaseQuery({
-    baseUrl: BASE_URL ?? '',
+    baseUrl: '',
   }),
   endpoints: (build) => ({
     getList: build.query<TableListDataType, TableListDataQueryTypes>({

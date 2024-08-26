@@ -1,14 +1,14 @@
 export const urls = {
-  login: '/login',
-  signup: '/signup',
-  users: '/users',
-  profile: '/profile',
-  getShipments: '/shipments',
-  createShipment: '/shipments/create',
-  customers: '/customers',
-  customerById: (id: string) => `/customers/${id}`,
-  shipmentDetails: (id: string) => `/shipments/${id}`,
-  shipmentTrack: (trackingId: string) => `/shipments/track/${trackingId}`,
+  login: '/api/v1/login',
+  signup: '/api/v1/signup',
+  users: '/api/v1/users',
+  profile: '/api/v1/profile',
+  getShipments: '/api/v1/shipments',
+  createShipment: '/api/v1/shipments/create',
+  customers: '/api/v1/customers',
+  customerById: (id: string) => `/api/v1/customers/${id}`,
+  shipmentDetails: (id: string) => `/api/v1/shipments/${id}`,
+  shipmentTrack: (trackingId: string) => `/api/v1/shipments/track/${trackingId}`,
 };
 
 export const ListUrls = {

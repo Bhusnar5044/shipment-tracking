@@ -4,13 +4,11 @@ import { urls } from '@/constants/urls';
 import { axiosBaseQuery } from '../service';
 import { CustomerIds, ICustomer } from './types';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 // Define an API slice with endpoints
 export const customerApi = createApi({
   reducerPath: 'customerApi',
   baseQuery: axiosBaseQuery({
-    baseUrl: BASE_URL ?? '',
+    baseUrl: '',
   }),
   endpoints: (build) => ({
     getCustomerIds: build.query<CustomerIds[], unknown>({
