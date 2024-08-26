@@ -21,31 +21,38 @@ export const keyPaths = {
 
 export const navLinks: Item[] = [
   {
+    name: 'Dashboard',
+    title: 'Dashboard',
+    slug: keyPaths.dashboard,
+    icon: 'dashboard',
+    routePermission: ['Admin', 'Manager'],
+  },
+  {
     name: 'Track Shipments',
     title: 'Track Shipments',
     slug: keyPaths.trackShipments,
-    icon: 'receipt',
+    icon: 'share_location',
     routePermission: ['Customer', 'Admin', 'Manager'],
   },
   {
     name: 'shipments',
     title: 'Shipments',
     slug: keyPaths.shipments,
-    icon: 'receipt',
-    routePermission: ['Admin', 'Manager'],
+    icon: 'monitoring',
+    routePermission: ['Admin', 'Manager', 'Customer'],
   },
   {
     name: 'User Management',
     title: 'User Management',
     slug: keyPaths.userManagement,
-    icon: 'avatar',
+    icon: 'supervisor_account',
     routePermission: ['Admin'],
   },
   {
     name: 'Customer Onboarding',
     title: 'Customer Onboarding',
     slug: keyPaths.customerManagement,
-    icon: 'avatar',
+    icon: 'how_to_reg',
     routePermission: ['Admin', 'Manager'],
   },
 ];

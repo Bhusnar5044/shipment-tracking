@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import sidePanel from './features/sidePanel';
 import userInfoReducer from './features/user';
-import { createUpdateCustomerApi, createUpdateShipmentApi, customerIdsApi, listApi, shipmentDetailsApi, shipmentTRackApi } from './services';
+import { customerApi, listApi, shipmentApi } from './services';
 
 export const makeStore = () => {
   return configureStore({
@@ -10,23 +10,13 @@ export const makeStore = () => {
       sidePanel,
       userInfo: userInfoReducer,
       [listApi.reducerPath]: listApi.reducer,
-      [shipmentDetailsApi.reducerPath]: shipmentDetailsApi.reducer,
-      [shipmentTRackApi.reducerPath]: shipmentTRackApi.reducer,
-      [createUpdateShipmentApi.reducerPath]: createUpdateShipmentApi.reducer,
-      [createUpdateCustomerApi.reducerPath]: createUpdateCustomerApi.reducer,
-      [customerIdsApi.reducerPath]: customerIdsApi.reducer,
+      [shipmentApi.reducerPath]: shipmentApi.reducer,
+      [customerApi.reducerPath]: customerApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat([
-        listApi.middleware,
-        shipmentDetailsApi.middleware,
-        shipmentTRackApi.middleware,
-        createUpdateShipmentApi.middleware,
-        createUpdateCustomerApi.middleware,
-        customerIdsApi.middleware,
-      ]),
+      }).concat([listApi.middleware, shipmentApi.middleware, customerApi.middleware]),
   });
 };
 

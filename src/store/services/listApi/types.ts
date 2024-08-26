@@ -26,7 +26,6 @@ export interface KeyResultMapping {
 }
 
 export type TableListDataType = {
-  data: any[];
+  list: any[];
   totalCount: number;
-  total?: number;
 };

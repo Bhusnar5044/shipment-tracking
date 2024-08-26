@@ -10,10 +10,10 @@ export interface IShipment {
   estimatedDeliveryDate: Date;
   actualDeliveryDate?: Date;
   containerNumbers: string[];
-  cargoDetails: {
-    description: string;
-    weight: number; // In kilograms
-    volume: number; // In cubic meters
+  cargoDetails?: {
+    description?: string;
+    weight?: number; // In kilograms
+    volume?: number; // In cubic meters
   };
   shippingAgent: string;
   isDeleted: boolean;

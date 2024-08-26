@@ -1,3 +1,9 @@
+export interface CustomerIds {
+  _id?: string;
+  email: string;
+  name: string;
+}
+
 export interface ICustomer {
   _id?: string;
   companyName: string;

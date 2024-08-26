@@ -4,6 +4,7 @@ export const urls = {
   users: '/users',
   profile: '/profile',
   getShipments: '/shipments',
+  createShipment: '/shipments/create',
   customers: '/customers',
   customerById: (id: string) => `/customers/${id}`,
   shipmentDetails: (id: string) => `/shipments/${id}`,
