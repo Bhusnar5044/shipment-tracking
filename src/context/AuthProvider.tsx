@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { urls } from '@/constants/urls';
 import { fetch, loadState, saveState } from '@/utils';
 
+import { keyPaths } from '@/constants/globalNavItems';
 import type { IAuthContext } from './types';
 
 const initialValue = { tokens: {}, profileInfo: {} };
@@ -30,8 +31,13 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const login = useCallback(
     async (data: any) => {
       saveState('user', data);
+      const {
+        user: { role },
+      } = data.data;
+
       fetchProfileDetails();
-      navigate(redirectTo ?? '/dashboard', { replace: true });
+      const path = role === 'Customer' ? keyPaths.shipments : keyPaths.dashboard;
+      navigate(redirectTo ?? path, { replace: true });
     },
     [fetchProfileDetails, navigate, redirectTo]
   );
