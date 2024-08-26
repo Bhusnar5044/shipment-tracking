@@ -52,6 +52,6 @@ export default defineConfig({
     //     // rewrite: (path) => path.replace(/^\/api/, '')
     //   },
     // },
-    // cors: false,
+    cors: false,
   }
 });
