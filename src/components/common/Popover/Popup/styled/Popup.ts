@@ -33,7 +33,7 @@ export const getPosition = ({ placement, distance = '0px' }: { placement: Placem
 };
 
 export const PopupClasses = (props: StyledPopoverPopupProps) =>
-  `z-100 absolute bg-${props.bgColor} ${props.fullWidth && fullWidth()} ${props.fullHeight && fullHeight()} ${getPosition({
+  `z-10 absolute bg-${props.bgColor} ${props.fullWidth && fullWidth()} ${props.fullHeight && fullHeight()} ${getPosition({
     placement: props.placement,
     distance: props.withArrow ? '1.5rem' : props.distance,
   })} ${props.withArrow && getStyleWithArrow}`;
