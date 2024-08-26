@@ -2,7 +2,7 @@ import Button from '@/components/common/Button';
 import TextField from '@/components/common/TextField';
 import { TextFieldEventType } from '@/components/common/TextField/types';
 import Typography from '@/components/common/Typography';
-import { useGetShipmentTrackDetailsQuery } from '@/store/services/shipmentTrackingApi';
+import { useGetShipmentTrackDetailsQuery } from '@/store/services/shipmentApi';
 import React, { useState } from 'react';
 
 const ShipmentTracking: React.FC = () => {

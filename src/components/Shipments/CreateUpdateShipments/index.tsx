@@ -5,13 +5,14 @@ import SingleSelect from '@/components/common/SingleSelect';
 import { SingleSelectOptionEvent } from '@/components/common/SingleSelect/types';
 import TextField from '@/components/common/TextField';
 import { TextFieldEventType } from '@/components/common/TextField/types';
+import { toast } from '@/components/common/Toast';
 import Typography from '@/components/common/Typography';
+import { keyPaths } from '@/constants/globalNavItems';
 import { shipmentStatusOptions } from '@/constants/selectOptions';
-import { ShipmentStatus } from '@/constants/types';
 import { useUpdateShipmentPostMutation } from '@/store/services';
-import { IShipment } from '@/store/services/createUpdateShipmentApi/types';
-import { useGetCustomerIdsQuery } from '@/store/services/customerIdsApi';
-import { useGetShipmentDetailsQuery } from '@/store/services/shipmentDetailsApi';
+import { useGetCustomerIdsQuery } from '@/store/services/customerApi';
+import { useGetShipmentDetailsQuery } from '@/store/services/shipmentApi';
+import { IShipment } from '@/store/services/shipmentApi/types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -22,6 +23,11 @@ const formInitialState: Partial<IShipment> = {
   currentStatus: 'Pending',
   containerNumbers: [],
   shippingAgent: '',
+  cargoDetails: {
+    description: '',
+    weight: 0,
+    volume: 0,
+  },
 };
 
 const CreateUpdateShipment: React.FC = () => {
@@ -42,25 +48,30 @@ const CreateUpdateShipment: React.FC = () => {
   );
 
   useEffect(() => {
-    if (id) setSkip((prev) => !prev);
+    console.log({ id });
+    if (id) setSkip(false);
   }, [id]);
 
   useEffect(() => {
     if (data) {
-      setForm({
-        shipmentId: data.shipmentId,
-        origin: data.origin,
-        destination: data.destination,
-        currentStatus: data.currentStatus as ShipmentStatus,
-        containerNumbers: data.containerNumbers,
-        shippingAgent: data.shippingAgent,
-      });
+      setForm(data);
     }
   }, [data]);
 
   const handleChange = (e: TextFieldEventType) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCargoDetailsChange = (e: TextFieldEventType) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      cargoDetails: {
+        ...prev?.cargoDetails,
+        [name]: value,
+      },
+    }));
   };
 
   const handleDateChange = (value: Date, name: string) => {
@@ -77,8 +88,12 @@ const CreateUpdateShipment: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await updateShipmentPost({ _id: id ?? '', ...form });
-    navigate('/shipments');
+    const response = await updateShipmentPost({ _id: id ?? '', ...form });
+    console.log({ response });
+    if (response) {
+      toast('Shipment created successfully');
+      navigate(keyPaths.shipments);
+    }
   };
 
   return (
@@ -92,7 +107,7 @@ const CreateUpdateShipment: React.FC = () => {
             variant="outlined"
             label="Select Customer"
             name="customer"
-            value={form.shipmentId}
+            value={form.customer}
             options={customerIdsOptions}
             onChange={handleSelectChange}
             required
@@ -138,6 +153,33 @@ const CreateUpdateShipment: React.FC = () => {
           name="containerNumbers"
           value={form?.containerNumbers?.join(', ') ?? ''}
           onChange={(e) => setForm({ ...form, containerNumbers: e.target.value.split(', ') })}
+          required
+        />
+        <TextField
+          variant="outlined"
+          label="Cargo Description"
+          type="text"
+          name="description"
+          value={form?.cargoDetails?.description}
+          onChange={handleCargoDetailsChange}
+          required
+        />
+        <TextField
+          variant="outlined"
+          label="Cargo weight in KGs"
+          type="num"
+          name="weight"
+          value={form?.cargoDetails?.weight}
+          onChange={handleCargoDetailsChange}
+          required
+        />
+        <TextField
+          variant="outlined"
+          label="Cargo volume in cubic"
+          type="num"
+          name="volume"
+          value={form?.cargoDetails?.volume}
+          onChange={handleCargoDetailsChange}
           required
         />
         <TextField
