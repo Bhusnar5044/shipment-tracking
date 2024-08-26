@@ -1,8 +1,8 @@
 import Chip from '@/components/common/Chip';
 import { ColumnTypes } from '@/components/common/DataTable/types';
+import { IShipment } from '@/store/services/shipmentApi/types';
 import { cn } from '@/utils';
 import ShowDetailsButton from '../../CellButtons/ShowDetailsButton';
-import { ShipmentsRecords } from './types';
 
 export function statusBackground(status: string) {
   switch (status) {
@@ -15,7 +15,7 @@ export function statusBackground(status: string) {
   }
 }
 
-export const shipmentColumn: ColumnTypes<ShipmentsRecords>[] = [
+export const shipmentColumn: ColumnTypes<IShipment>[] = [
   {
     accessorKey: 'trackingId',
     header: 'Tracking Id',
@@ -29,25 +29,24 @@ export const shipmentColumn: ColumnTypes<ShipmentsRecords>[] = [
     header: 'Destination',
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: 'currentStatus',
+    header: 'Current Status',
     cellComponent: ({ row }) => (
-      <Chip
-        size="XS"
-        className={cn('capitalize', statusBackground(row?.original?.status?.split('_')?.join(' ')?.slice(6)?.trim()?.toLowerCase()))}
-        label={row?.original?.status?.split('_')?.join(' ')?.slice(6)}
-      />
+      <Chip size="XS" className={cn('capitalize', statusBackground(row?.original?.currentStatus))} label={row?.original?.currentStatus} />
     ),
+  },
+  {
+    accessorKey: 'estimatedDeliveryDate',
+    header: 'Estimated Delivery Date',
   },
   {
     accessorKey: 'action',
     header: 'action',
     enableHiding: false,
-    cellComponent: ({ row }) => <ShowDetailsButton data={row?.original} sidePanelKey={'orders_action'} />,
+    cellComponent: ({ row }) => (
+      <div>
+        <ShowDetailsButton data={row?.original} sidePanelKey={'shipment_content'} />
+      </div>
+    ),
   },
-  // {
-  //   accessorKey: "estimatedDeliveryDate",
-  //   header: "Estimated Delivery Date",
-  //   cellComponent: ({ row }: { row: { original: AdminTypes } }) => <EditDetailsButton sidePanelKey="edit_rake_data" data={row.original} />,
-  // },
 ];

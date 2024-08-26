@@ -13,30 +13,31 @@ import { getTabContentColumns } from './utils';
 
 export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, serviceApiKey, buttonComp }) => {
   const [paramData, setParamData] = useState<{ sidePanelParamId?: string; sidePanelParamKey?: string }>({});
+  const [calcHeight, setCalcHeight] = useState(0);
   const { data: sidePanelData, sidePanelKey, isOpen } = useAppSelector((state) => state.sidePanel);
-  const dispatch = useAppDispatch(),
-    {
-      data,
-      selectedTab,
-      size,
-      queryParams,
-      setQueryParams,
-      // refetch,
-      showMoreFilters,
-      setShowMoreFilters,
-      filtersApplied,
-      setFiltersApplied,
-      clearFilter,
-      applyFilter,
-      handleFilterChange,
-      handleTabChange,
-      filters,
-    } = useContent(serviceApiKey, defaultTab, tabType ?? '') ?? {},
-    onClose = useCallback(() => {
-      dispatch(closeSidePanel());
-      setParamData({});
-    }, [dispatch]),
-    [calcHeight, setCalcHeight] = useState(0);
+  const dispatch = useAppDispatch();
+  const {
+    data,
+    selectedTab,
+    size,
+    queryParams,
+    setQueryParams,
+    // refetch,
+    showMoreFilters,
+    setShowMoreFilters,
+    filtersApplied,
+    setFiltersApplied,
+    clearFilter,
+    applyFilter,
+    handleFilterChange,
+    handleTabChange,
+    filters,
+  } = useContent(serviceApiKey, defaultTab, tabType ?? '') ?? {};
+
+  const onClose = useCallback(() => {
+    dispatch(closeSidePanel());
+    setParamData({});
+  }, [dispatch]);
 
   const columns = getTabContentColumns(serviceApiKey);
 
@@ -67,11 +68,6 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
       setCalcHeight(height);
     }
   }, []);
-  useEffect(() => {
-    if (isOpen) {
-      dispatch(closeSidePanel());
-    }
-  }, [selectedTab, isOpen, dispatch]);
 
   return (
     <div className="x-4 mb-10 w-screen lg:w-full lg:px-0" key={serviceApiKey}>
@@ -116,25 +112,15 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
       >
         <DataTable
           columns={columns}
-          data={data?.data ?? []}
+          data={data?.list ?? []}
           pageSize={size}
           totalCount={data?.totalCount ?? 0}
           // onDownload={onDownload}
           // disableDownload={!disableDownload}
           calcHeight={calcHeight}
         />
-        <RightSidePanel
-          isOpen={sidePanelKey !== 'static_announcement' && (isOpen || !!(paramData.sidePanelParamId && paramData.sidePanelParamKey))}
-          onClose={onClose}
-          sidePanelData={sidePanelData}
-          sidePanelKey={sidePanelKey}
-        >
-          {SidePanelContent(
-            sidePanelKey || (paramData.sidePanelParamKey as string),
-            sidePanelData
-            // refetch,
-            // paramData.sidePanelParamId ?? ""
-          )}
+        <RightSidePanel isOpen={isOpen} onClose={onClose} sidePanelData={sidePanelData} sidePanelKey={sidePanelKey}>
+          {SidePanelContent(sidePanelKey || (paramData.sidePanelParamKey as string), sidePanelData)}
         </RightSidePanel>
       </Tabs>
     </div>

@@ -1,19 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Typography from '@/components/common/Typography';
-import { useGetShipmentDetailsQuery } from '@/store/services/shipmentDetailsApi';
-import { ShipmentDetails } from '@/store/services/shipmentDetailsApi/types';
+import { IShipment } from '@/store/services/shipmentApi/types';
 import { memo } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const ShipmentContent = memo(({ sidePanelData }: { sidePanelData: ShipmentDetails }) => {
-  const { id = '' } = useParams<{ id: string }>();
-  const shipmentId = sidePanelData.shipmentId;
-  const { data, isLoading } = useGetShipmentDetailsQuery({ id: id ?? shipmentId });
-
-  if (isLoading) {
-    return <Typography>Loading...</Typography>;
-  }
-
+const ShipmentContent = memo(({ sidePanelData }: { sidePanelKey: string; sidePanelData: IShipment }) => {
   return (
     <div className="p-8">
       <Typography variant="h3" className="mb-6">
@@ -21,30 +12,31 @@ const ShipmentContent = memo(({ sidePanelData }: { sidePanelData: ShipmentDetail
       </Typography>
       <div className="bg-white p-4 rounded-md shadow-sm">
         <Typography variant="h4" className="text-xl font-bold">
-          {data?.shipmentId}
+          {sidePanelData?.shipmentId}
         </Typography>
         <Typography>
-          <strong>Origin:</strong> {data?.origin}
+          <strong>Origin:</strong> {sidePanelData?.origin}
         </Typography>
         <Typography>
-          <strong>Destination:</strong> {data?.destination}
+          <strong>Destination:</strong> {sidePanelData?.destination}
         </Typography>
         <Typography>
-          <strong>Status:</strong> {data?.currentStatus}
+          <strong>Status:</strong> {sidePanelData?.currentStatus}
         </Typography>
         <Typography>
-          <strong>Estimated Delivery:</strong> {data?.estimatedDeliveryDate ? new Date(data?.estimatedDeliveryDate).toLocaleDateString() : 'NA'}
+          <strong>Estimated Delivery:</strong>{' '}
+          {sidePanelData?.estimatedDeliveryDate ? new Date(sidePanelData?.estimatedDeliveryDate).toLocaleDateString() : 'NA'}
         </Typography>
         <Typography>
-          <strong>Containers:</strong> {data?.containerNumbers.join(', ')}
+          <strong>Containers:</strong> {sidePanelData?.containerNumbers?.join(', ')}
         </Typography>
         <Typography>
-          <strong>Shipping Agent:</strong> {data?.shippingAgent}
+          <strong>Shipping Agent:</strong> {sidePanelData?.shippingAgent}
         </Typography>
         <Typography>
-          <strong>Tracking ID:</strong> {data?.trackingId}
+          <strong>Tracking ID:</strong> {sidePanelData?.trackingId}
         </Typography>
-        <Link to={`/shipments/edit/${id}`} className="inline-block mt-4 px-4 py-2 text-white bg-yellow-600 rounded-md hover:bg-yellow-700">
+        <Link to={`/dashboard/shipments/${sidePanelData._id}`} className="underline underline-offset-4 text-blue-500 hover:text-blue-800">
           Edit Shipment
         </Link>
       </div>
