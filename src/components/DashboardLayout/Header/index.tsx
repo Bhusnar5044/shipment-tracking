@@ -11,11 +11,13 @@ import { findNavLinkBySlug } from '@/utils/checkHeaderTitle';
 import Typography from '@/components/common/Typography';
 import { navLinks } from '@/constants/globalNavItems';
 import { useAuth } from '@/context/AuthProvider';
+import { getRoleAndPermissions } from '@/utils/getRoleAndPermissions';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header: FC = () => {
   const { isExpanded, setIsExpanded } = useContext(SideNavContext);
-  const { logout, profileInfo } = useAuth();
+  const { logout } = useAuth();
+  const { userRole } = getRoleAndPermissions();
   const [, startTransition] = useTransition();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -55,7 +57,7 @@ const Header: FC = () => {
           <div className="flex items-center gap-2 hover:cursor-pointer">
             <Icon iconName="account_circle" className="text-gray-700" />
             <Typography variant="body2" weight="semibold" typoColor="grey" className="inline-block whitespace-nowrap capitalize tracking-wide">
-              {profileInfo?.fullName ?? 'User'}
+              {userRole ?? 'User'}
             </Typography>
           </div>
           <Popover.Popup placement="bottom-start" className="shadow w-40 p-3">
