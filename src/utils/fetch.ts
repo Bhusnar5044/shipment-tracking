@@ -13,7 +13,7 @@ export async function fetch(config: AxiosRequestConfig, token?: string, noAuthor
   try {
     const request = {
       ...restConfig,
-      url: `${url}`,
+      url: `http://shipment.fun:3000${url}`,
       headers: {
         ...(headers ?? {}),
         ...(!noAuthorization
