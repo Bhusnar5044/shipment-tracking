@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HTMLProps } from "@/utils";
+import { HTMLProps } from '@/utils';
 
 export type Variant =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "body1"
-  | "body2"
-  | "body3"
-  | "body4"
-  | "overline"
-  | "caption"
-  | "subtitle1"
-  | "subtitle2"
-  | "subtitle3"
-  | "button1"
-  | "button2"
-  | "button3";
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'body1'
+  | 'body2'
+  | 'body3'
+  | 'body4'
+  | 'overline'
+  | 'caption'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'subtitle3'
+  | 'button1'
+  | 'button2'
+  | 'button3';
 
-export type Weight = "thin" | "light" | "normal" | "medium" | "semibold" | "bold";
+export type Weight = 'thin' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
 
 export interface Props extends HTMLProps<HTMLElement> {
   id?: string;

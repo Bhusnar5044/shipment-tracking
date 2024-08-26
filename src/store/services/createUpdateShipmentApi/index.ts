@@ -15,13 +15,13 @@ export const createUpdateShipmentApi = createApi({
   tagTypes: ['Post'],
   endpoints: (build) => ({
     updateShipmentPost: build.mutation<IShipment, Partial<IShipment> & Pick<IShipment, '_id'>>({
-        query: ({ _id, ...patch }) => ({
-            url: _id ? urls.shipmentDetails(_id): urls.getShipments,
-          method: _id ? 'POST': 'PUT',
-          data: patch,
-        }),
-        invalidatesTags: ['Post'],
-    }),  
+      query: ({ _id, ...patch }) => ({
+        url: _id ? urls.shipmentDetails(_id) : urls.getShipments,
+        method: _id ? 'POST' : 'PUT',
+        data: patch,
+      }),
+      invalidatesTags: ['Post'],
+    }),
   }),
 });
 

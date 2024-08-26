@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 
-import axiosInstance from './axiosInstance';
 import { getRoleAndPermissions } from '@/utils/getRoleAndPermissions';
+import axiosInstance from './axiosInstance';
 
 export type AxiosOptions = {
   withToken?: boolean;
@@ -24,7 +24,7 @@ export type Response<T = any> = {
 export const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: '' }) =>
   async ({ url, method, data, params, headers }: AxiosRequestConfig) => {
-    const {token} = getRoleAndPermissions()
+    const { token } = getRoleAndPermissions();
     try {
       const result = await axiosInstance({
         url: baseUrl + url,
@@ -33,12 +33,13 @@ export const axiosBaseQuery =
         params,
         headers: {
           ...(headers ?? {}),
-          ...(token ? {
+          ...(token
+            ? {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token ?? ''}`,
-              }: {}
-            ),
+              }
+            : {}),
         },
       });
       return { data: result.data };

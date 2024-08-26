@@ -1,5 +1,5 @@
-import { HTMLProps } from "@/utils";
-import { Placement } from "../types";
+import { HTMLProps } from '@/utils';
+import { Placement } from '../types';
 
 export interface PopoverPopupProps extends HTMLProps<HTMLDivElement> {
   /** Placement of the popup */

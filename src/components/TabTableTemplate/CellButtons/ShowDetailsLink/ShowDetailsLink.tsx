@@ -11,11 +11,7 @@ function getNestedValue(obj: any, path: string) {
   return path.split('.').reduce((acc, key) => acc?.[key], obj);
 }
 
-export function ShowDetailsLink<T>({
-  data,
-  sidePanelKey,
-  displayKey,
-}: Readonly<Props<T, any>>) {
+export function ShowDetailsLink<T>({ data, sidePanelKey, displayKey }: Readonly<Props<T, any>>) {
   const displayValue = getNestedValue(data, displayKey) ?? displayKey;
 
   const dispatch = useAppDispatch();
@@ -25,15 +21,13 @@ export function ShowDetailsLink<T>({
       openSidePanelWithData({
         data,
         key: sidePanelKey,
-      }),
+      })
     );
   }, [data, dispatch, sidePanelKey]);
 
   return (
     <Button onClick={handleButtonClick} variant="flat">
-      {['pending_vendor', 'vendorEdit'].includes(sidePanelKey)
-        ? displayValue
-        : `#${displayValue}`}
+      {['pending_vendor', 'vendorEdit'].includes(sidePanelKey) ? displayValue : `#${displayValue}`}
     </Button>
   );
 }

@@ -19,6 +19,6 @@ export interface ICustomer {
       destinationPort: string;
     }[];
   };
-  role?: 'Customer',
+  role?: 'Customer';
   password?: string;
 }

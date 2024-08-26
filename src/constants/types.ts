@@ -29,8 +29,8 @@ export type KeyPathsKeys = keyof typeof keyPaths;
 
 export type ListUrlsKeys = keyof typeof ListUrls;
 
-export type ShipmentStatus = 'Pending' | 'In Transit' | 'Arrived' | 'Delivered' | 'Cancelled'
+export type ShipmentStatus = 'Pending' | 'In Transit' | 'Arrived' | 'Delivered' | 'Cancelled';
 
 export type UnknownObject = {
-    [key: string]: any;
+  [key: string]: any;
 };

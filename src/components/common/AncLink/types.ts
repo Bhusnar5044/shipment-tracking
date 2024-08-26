@@ -3,9 +3,7 @@ import type { PropsWithChildren } from 'react';
 
 import type { HTMLProps } from '@/utils';
 
-export interface AncLinkProps
-  extends HTMLProps<HTMLElement>,
-    PropsWithChildren {
+export interface AncLinkProps extends HTMLProps<HTMLElement>, PropsWithChildren {
   href: string;
   target?: string;
   className?: string;

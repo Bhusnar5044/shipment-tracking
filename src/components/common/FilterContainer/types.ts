@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 export interface Props extends PropsWithChildren {
   className?: string;
   // advancedSearchEnabled?: boolean;

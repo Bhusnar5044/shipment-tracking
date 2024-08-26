@@ -1,14 +1,14 @@
 import React from 'react';
 
+import { keyPaths } from '@/constants/globalNavItems';
+import CreateUpdateShipmentPage from '@/pages/createUpdateShipment';
+import CustomerOnboarding from '@/pages/customerOnboarding';
 import DashboardPage from '@/pages/dashboard';
 import { Login } from '@/pages/login/login';
 import Register from '@/pages/register';
-import { PathRouteProps } from 'react-router-dom';
-import Shipments from '@/pages/shipments';
-import { keyPaths } from '@/constants/globalNavItems';
-import CreateUpdateShipmentPage from '@/pages/createUpdateShipment';
 import ShipmentTrackingPage from '@/pages/shipmentTracking';
-import CustomerOnboarding from '@/pages/customerOnboarding';
+import Shipments from '@/pages/shipments';
+import { PathRouteProps } from 'react-router-dom';
 
 const Home = React.lazy(() => import('@/pages/home'));
 
@@ -34,7 +34,7 @@ export const privateRoutes: Array<PathRouteProps> = [
   },
   {
     path: keyPaths.trackShipments,
-    element: <ShipmentTrackingPage />
+    element: <ShipmentTrackingPage />,
   },
   {
     path: keyPaths.shipments,
@@ -42,14 +42,14 @@ export const privateRoutes: Array<PathRouteProps> = [
   },
   {
     path: keyPaths.createShipment,
-    element: <CreateUpdateShipmentPage />
+    element: <CreateUpdateShipmentPage />,
   },
   {
     path: keyPaths.updateShipment,
-    element: <CreateUpdateShipmentPage />
+    element: <CreateUpdateShipmentPage />,
   },
   {
     path: keyPaths.customerManagement,
-    element: <CustomerOnboarding />
-  }
+    element: <CustomerOnboarding />,
+  },
 ];

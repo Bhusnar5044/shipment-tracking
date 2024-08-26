@@ -16,11 +16,7 @@ export const EditDetailsButton: FC<Props> = memo(({ data, sidePanelKey }) => {
   }, [data, dispatch, sidePanelKey]);
 
   return (
-    <Button
-      variant="outline"
-      onClick={handleButtonClick}
-      className="size-[30px]"
-    >
+    <Button variant="outline" onClick={handleButtonClick} className="size-[30px]">
       <Icon iconName="edit" />
     </Button>
   );

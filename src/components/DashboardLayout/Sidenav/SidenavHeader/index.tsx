@@ -1,6 +1,6 @@
-import Typography from "@/components/common/Typography";
-import { FC, memo } from "react";
-import { ISideNavHeader } from "../types";
+import Typography from '@/components/common/Typography';
+import { FC, memo } from 'react';
+import { ISideNavHeader } from '../types';
 
 export const SideNavHeader: FC<ISideNavHeader> = memo(({ title, isHovered }) => {
   return (
@@ -9,7 +9,7 @@ export const SideNavHeader: FC<ISideNavHeader> = memo(({ title, isHovered }) => 
     >
       <img src="/assets/logo.svg" alt="logo" width="50" height="50" />
       {title && (
-        <Typography className={`transition-[0.2s] ${isHovered ? "" : "hidden"}`} variant="h3">
+        <Typography className={`transition-[0.2s] ${isHovered ? '' : 'hidden'}`} variant="h3">
           {title}
         </Typography>
       )}
@@ -17,5 +17,5 @@ export const SideNavHeader: FC<ISideNavHeader> = memo(({ title, isHovered }) => 
   );
 });
 
-SideNavHeader.displayName = "SideNavHeader";
+SideNavHeader.displayName = 'SideNavHeader';
 export default SideNavHeader;

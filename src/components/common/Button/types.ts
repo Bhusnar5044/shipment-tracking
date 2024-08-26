@@ -30,8 +30,4 @@ export type ButtonOptions = {
 
 export type Ref = HTMLButtonElement;
 
-export type ButtonProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
-> &
-  ButtonOptions;
+export type ButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & ButtonOptions;

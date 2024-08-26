@@ -1,19 +1,19 @@
-import RightSidePanel from "@/components/common/RightSidePanel";
-import DataTable from "@/components/common/DataTable";
-import Tabs  from "@/components/common/Tab";
-import { FC, memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ActionSection } from "./filterContent/ActionSection";
-import { FilterSection } from "./filterContent/FilterSection";
-import SidePanelContent from "./SidePanelContent";
-import { Props } from "./types";
-import { useContent } from "./useContent";
-import { getTabContentColumns } from "./utils";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { closeSidePanel } from "@/store/features/sidePanel";
+import DataTable from '@/components/common/DataTable';
+import RightSidePanel from '@/components/common/RightSidePanel';
+import Tabs from '@/components/common/Tab';
+import { closeSidePanel } from '@/store/features/sidePanel';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { FC, memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import SidePanelContent from './SidePanelContent';
+import { ActionSection } from './filterContent/ActionSection';
+import { FilterSection } from './filterContent/FilterSection';
+import { Props } from './types';
+import { useContent } from './useContent';
+import { getTabContentColumns } from './utils';
 
 export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, serviceApiKey, buttonComp }) => {
   const [paramData, setParamData] = useState<{ sidePanelParamId?: string; sidePanelParamKey?: string }>({});
-  const { data: sidePanelData, sidePanelKey, isOpen } = useAppSelector(state => state.sidePanel);
+  const { data: sidePanelData, sidePanelKey, isOpen } = useAppSelector((state) => state.sidePanel);
   const dispatch = useAppDispatch(),
     {
       data,
@@ -31,7 +31,7 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
       handleFilterChange,
       handleTabChange,
       filters,
-    } = useContent(serviceApiKey, defaultTab, tabType ?? "") ?? {},
+    } = useContent(serviceApiKey, defaultTab, tabType ?? '') ?? {},
     onClose = useCallback(() => {
       dispatch(closeSidePanel());
       setParamData({});
@@ -44,8 +44,8 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
   const filterWrapperRef = useRef<HTMLDivElement>(null);
   const titleSectionRef = useRef<HTMLDivElement>(null);
 
-  const sidePanelURLParamId = queryParams?.get("sidePanelItemId") ?? undefined;
-  const sidePanelURLParamKey = queryParams?.get("sidePanelKey") ?? undefined;
+  const sidePanelURLParamId = queryParams?.get('sidePanelItemId') ?? undefined;
+  const sidePanelURLParamKey = queryParams?.get('sidePanelKey') ?? undefined;
 
   useEffect(() => {
     if (sidePanelURLParamId && sidePanelURLParamKey) {
@@ -124,14 +124,14 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
           calcHeight={calcHeight}
         />
         <RightSidePanel
-          isOpen={sidePanelKey !== "static_announcement" && (isOpen || !!(paramData.sidePanelParamId && paramData.sidePanelParamKey))}
+          isOpen={sidePanelKey !== 'static_announcement' && (isOpen || !!(paramData.sidePanelParamId && paramData.sidePanelParamKey))}
           onClose={onClose}
           sidePanelData={sidePanelData}
           sidePanelKey={sidePanelKey}
         >
           {SidePanelContent(
             sidePanelKey || (paramData.sidePanelParamKey as string),
-            sidePanelData,
+            sidePanelData
             // refetch,
             // paramData.sidePanelParamId ?? ""
           )}
@@ -141,4 +141,4 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
   );
 });
 
-TabTableTemplate.displayName = "TabTableTemplate";
+TabTableTemplate.displayName = 'TabTableTemplate';

@@ -5,9 +5,7 @@ import Cookies from 'js-cookie';
 import type { IUser, IUserInfo } from './types';
 
 const initialState: IUserInfo = {
-  userInformation: Cookies.get('userInfo')
-    ? JSON.parse(Cookies.get('userInfo')!)
-    : null,
+  userInformation: Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')!) : null,
 };
 
 const userInfoSlice = createSlice({

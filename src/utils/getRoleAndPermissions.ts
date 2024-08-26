@@ -5,6 +5,9 @@ export const getRoleAndPermissions = (): {
   permissions: string[];
   token: string;
 } => {
-  const { user: {role = '', permissions = []}, tokenData: {token= ''} } = loadState('user')?.data ?? {user:{}, tokenData:{}};
+  const {
+    user: { role = '', permissions = [] },
+    tokenData: { token = '' },
+  } = loadState('user')?.data ?? { user: {}, tokenData: {} };
   return { userRole: role, permissions, token };
 };

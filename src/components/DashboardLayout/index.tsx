@@ -1,21 +1,20 @@
-import { FC, HTMLProps, memo } from "react";
-import PageLayout from "./PageLayout";
-import Header from "./Header";
-import SideNav from "./Sidenav";
+import { SideNavContextProvider } from '@/context/SideNavContext';
+import { FC, HTMLProps, memo } from 'react';
 import { Outlet } from 'react-router-dom';
-import { SideNavContextProvider } from "@/context/SideNavContext";
-
+import Header from './Header';
+import PageLayout from './PageLayout';
+import SideNav from './Sidenav';
 
 const DashboardLayout: FC<HTMLProps<HTMLDivElement>> = memo(() => (
-    <SideNavContextProvider>
+  <SideNavContextProvider>
     <PageLayout>
-        <Header />
-        <SideNav />
-        <Outlet />
+      <Header />
+      <SideNav />
+      <Outlet />
     </PageLayout>
-    </SideNavContextProvider>
+  </SideNavContextProvider>
 ));
 
-DashboardLayout.displayName = "DashboardLayout";
+DashboardLayout.displayName = 'DashboardLayout';
 
 export default DashboardLayout;

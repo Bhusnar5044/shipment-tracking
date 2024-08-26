@@ -1,19 +1,19 @@
-import { cn } from "@/utils";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { FC, memo, useCallback, useEffect, useMemo, useState } from "react";
-import { DateRange } from "react-day-picker";
-import Button from "../Button";
-import Calendar from "../Calendar";
-import Popover from "../Popover";
-import Typography from "../Typography";
-import { Preset, Props } from "./types";
+import { cn } from '@/utils';
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { DateRange } from 'react-day-picker';
+import Button from '../Button';
+import Calendar from '../Calendar';
+import Popover from '../Popover';
+import Typography from '../Typography';
+import { Preset, Props } from './types';
 
 const PRESETS: Preset[] = [
-  { name: "today", label: "Today", checked: false },
-  { name: "yesterday", label: "Yesterday", checked: false },
-  { name: "last7", label: "This week", checked: false },
-  { name: "last30", label: "This month", checked: false },
+  { name: 'today', label: 'Today', checked: false },
+  { name: 'yesterday', label: 'Yesterday', checked: false },
+  { name: 'last7', label: 'This week', checked: false },
+  { name: 'last30', label: 'This month', checked: false },
 ];
 
 export const DateRangePicker: FC<Props> = memo(
@@ -44,23 +44,23 @@ export const DateRangePicker: FC<Props> = memo(
     const [selectedPreset, setSelectedPreset] = useState<string | undefined>(undefined);
 
     const commonClasses = useMemo(() => {
-      let borderClass = "",
-        focusClass = "";
+      let borderClass = '',
+        focusClass = '';
       if (isErrorPresent) {
-        borderClass = "border-red-500";
-        focusClass = "focus:border-red-500";
+        borderClass = 'border-red-500';
+        focusClass = 'focus:border-red-500';
       } else {
-        borderClass = "border-gray-300";
-        focusClass = "focus:border-blue-500";
+        borderClass = 'border-gray-300';
+        focusClass = 'focus:border-blue-500';
       }
       return cn(
-        "form-input max-h-[2.35rem] text-black",
-        Prefix ? "pl-10" : "pl-3",
-        "rounded",
+        'form-input max-h-[2.35rem] text-black',
+        Prefix ? 'pl-10' : 'pl-3',
+        'rounded',
         borderClass,
         focusClass,
-        size === "S" ? "text-sm" : "text-base",
-        variant === "outlined" ? "border" : variant === "filled" ? "bg-gray-100" : "",
+        size === 'S' ? 'text-sm' : 'text-base',
+        variant === 'outlined' ? 'border' : variant === 'filled' ? 'bg-gray-100' : '',
         className
       );
     }, [Prefix, className, isErrorPresent, size, variant]);
@@ -95,7 +95,7 @@ export const DateRangePicker: FC<Props> = memo(
         range && onUpdate(range, dateType);
         range?.to?.setHours(23, 59, 59, 999);
         setDate(range);
-        setSelectedPreset("");
+        setSelectedPreset('');
       },
       [onUpdate, date, dateType]
     );
@@ -115,26 +115,26 @@ export const DateRangePicker: FC<Props> = memo(
       const first = from.getDate() - from.getDay();
 
       switch (preset.name) {
-        case "today":
+        case 'today':
           to.setHours(23, 59, 59, 999);
           break;
-        case "yesterday":
+        case 'yesterday':
           from.setDate(from.getDate() - 1);
           to.setDate(to.getDate() - 1);
           break;
-        case "last7":
-        case "last14":
-        case "last30":
-          from.setDate(from.getDate() - (preset.name === "last7" ? 6 : preset.name === "last14" ? 13 : 29));
+        case 'last7':
+        case 'last14':
+        case 'last30':
+          from.setDate(from.getDate() - (preset.name === 'last7' ? 6 : preset.name === 'last14' ? 13 : 29));
           break;
-        case "thisWeek":
+        case 'thisWeek':
           from.setDate(first);
           break;
-        case "lastWeek":
+        case 'lastWeek':
           from.setDate(from.getDate() - 7 - from.getDay());
           to.setDate(to.getDate() - to.getDay() - 1);
           break;
-        case "thisMonth":
+        case 'thisMonth':
           from.setDate(1);
           to.setHours(23, 59, 59, 999);
           break;
@@ -146,17 +146,23 @@ export const DateRangePicker: FC<Props> = memo(
       return { from, to };
     };
 
-    const setPreset = useCallback((preset: string): void => {
-      const range = getPresetRange(preset);
-      onUpdate(range, dateType);
-      setDate(range);
-    },[dateType, onUpdate]);
+    const setPreset = useCallback(
+      (preset: string): void => {
+        const range = getPresetRange(preset);
+        onUpdate(range, dateType);
+        setDate(range);
+      },
+      [dateType, onUpdate]
+    );
 
-    const handlePreset = useCallback((value: string) => {
+    const handlePreset = useCallback(
+      (value: string) => {
         setSelectedPreset(value);
         setPreset(value);
         setPresets((prev) => prev.map((item) => ({ ...item, checked: item.name === value })));
-      }, [setPreset]);
+      },
+      [setPreset]
+    );
 
     const handlePopverChange = useCallback((isVisible: boolean) => setIsCalenderOpen(isVisible), []);
 
@@ -167,18 +173,18 @@ export const DateRangePicker: FC<Props> = memo(
     }, [date?.to]);
 
     return (
-      <div className={cn("left-0 grid gap-2", className)}>
+      <div className={cn('left-0 grid gap-2', className)}>
         <Popover interactionType="click" isOpen={isCalenderOpen} handleChange={handlePopverChange}>
           {label && <label className="form-label">{label}</label>}
           <Button
             id="date"
             size={size}
-            variant={"outline"}
+            variant={'outline'}
             className={cn(
               `flex w-56 justify-start p-2 text-left font-normal focus:ring-0 md:min-w-[${minWidth}] lg:max-w-[${maxWidth}]`,
               commonClasses,
               {
-                "w-full": fullWidth,
+                'w-full': fullWidth,
               }
             )}
           >
@@ -186,10 +192,10 @@ export const DateRangePicker: FC<Props> = memo(
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+                  {format(date.from, 'LLL dd, y')} - {format(date.to, 'LLL dd, y')}
                 </>
               ) : (
-                format(date.from, "LLL dd, y")
+                format(date.from, 'LLL dd, y')
               )
             ) : (
               <span className="text-admin-outline">Pick a date</span>
@@ -201,7 +207,7 @@ export const DateRangePicker: FC<Props> = memo(
                 {presets.map((item) => (
                   <Button
                     key={item.name}
-                    className={cn("px-4 py-2 text-base font-medium no-underline", { "text-red-800": item.name === selectedPreset })}
+                    className={cn('px-4 py-2 text-base font-medium no-underline', { 'text-red-800': item.name === selectedPreset })}
                     variant="flat"
                     onClick={() => handlePreset(item.name)}
                   >
@@ -227,7 +233,7 @@ export const DateRangePicker: FC<Props> = memo(
           </Popover.Popup>
         </Popover>
         {isErrorPresent && !!errorText && (
-          <Typography variant="body4" className={cn("mt-1 text-xs italic text-red-500")}>
+          <Typography variant="body4" className={cn('mt-1 text-xs italic text-red-500')}>
             {errorText}
           </Typography>
         )}
@@ -236,16 +242,16 @@ export const DateRangePicker: FC<Props> = memo(
   }
 );
 
-DateRangePicker.displayName = "DateRangePicker";
+DateRangePicker.displayName = 'DateRangePicker';
 DateRangePicker.defaultProps = {
-  size: "M",
-  minWidth: "20rem",
+  size: 'M',
+  minWidth: '20rem',
   fullWidth: false,
   disabled: false,
   required: false,
-  label: "",
-  helperText: "",
-  errorText: "",
+  label: '',
+  helperText: '',
+  errorText: '',
 };
 
 export default DateRangePicker;

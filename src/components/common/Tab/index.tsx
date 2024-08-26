@@ -2,7 +2,7 @@ import { Children, forwardRef, memo } from 'react';
 
 import { cn } from '@/utils';
 
-import {Button} from '../Button';
+import { Button } from '../Button';
 import type { TabsProps } from './types';
 
 const Tabs = memo(
@@ -19,23 +19,17 @@ const Tabs = memo(
         actionSection,
         filterSection,
       },
-      ref,
+      ref
     ) => {
-      const activeTab =
-        typeof selectedTab === 'string' && tabs.includes(selectedTab)
-          ? selectedTab
-          : tabs[0];
+      const activeTab = typeof selectedTab === 'string' && tabs.includes(selectedTab) ? selectedTab : tabs[0];
       const arrayChildren = Children.toArray(children);
       return (
         <div ref={ref} className={cn('flex flex-col', className)}>
           <div className="z-10 -mx-4 bg-admin-surfaceBright px-4 py-2 lg:m-0 lg:px-8">
             <div
-              className={cn(
-                ' z-10 flex w-full flex-col justify-between gap-3 bg-admin-surfaceBright pb-2 lg:flex-row lg:items-center',
-                {
-                  'justify-end': !tabs.length,
-                },
-              )}
+              className={cn(' z-10 flex w-full flex-col justify-between gap-3 bg-admin-surfaceBright pb-2 lg:flex-row lg:items-center', {
+                'justify-end': !tabs.length,
+              })}
             >
               {!!tabs.length && (
                 <div
@@ -49,9 +43,7 @@ const Tabs = memo(
                     <Button
                       variant="flat"
                       className={`gap-2 capitalize text-admin-onSurfaceVariant hover:bg-admin-surfaceContainerLow focus:ring-0 ${
-                        activeTab === tab
-                          ? 'border-b-4 border-admin-primary font-bold text-admin-primary'
-                          : ''
+                        activeTab === tab ? 'border-b-4 border-admin-primary font-bold text-admin-primary' : ''
                       } py-2 lg:px-4`}
                       onClick={() => onClick(tab)}
                       key={tab}
@@ -68,9 +60,7 @@ const Tabs = memo(
                   ))}
                 </div>
               )}
-              {!!actionSection && (
-                <div className="self-end">{actionSection}</div>
-              )}
+              {!!actionSection && <div className="self-end">{actionSection}</div>}
             </div>
             <div className="relative ">{filterSection}</div>
           </div>
@@ -79,10 +69,7 @@ const Tabs = memo(
               <div className="tab-pane active">{children}</div>
             ) : (
               arrayChildren?.map?.((child, index) => (
-                <div
-                  key={tabs[index]}
-                  className={`tab-pane ${tabs[index] === activeTab ? 'active' : ''}`}
-                >
+                <div key={tabs[index]} className={`tab-pane ${tabs[index] === activeTab ? 'active' : ''}`}>
                   {child}
                 </div>
               ))
@@ -90,9 +77,9 @@ const Tabs = memo(
           </div>
         </div>
       );
-    },
-  ),
+    }
+  )
 );
 
 Tabs.displayName = 'Tabs';
- export default Tabs;
+export default Tabs;

@@ -1,11 +1,11 @@
-import {Button} from "@/components/common/Button";
-import CommonFilter from "@/components/common/CommonFilter";
-import Icon from "@/components/common/Icon";
-import { FilterConfig } from "@/constants/types";
-import { cn } from "@/utils";
-import { FC } from "react";
-import { getActionSectionComponent } from "../utils";
-import { ActionSectionProps } from "./types";
+import { Button } from '@/components/common/Button';
+import CommonFilter from '@/components/common/CommonFilter';
+import Icon from '@/components/common/Icon';
+import { FilterConfig } from '@/constants/types';
+import { cn } from '@/utils';
+import { FC } from 'react';
+import { getActionSectionComponent } from '../utils';
+import { ActionSectionProps } from './types';
 
 export const ActionSection: FC<ActionSectionProps> = ({
   serviceApiKey,
@@ -40,9 +40,9 @@ export const ActionSection: FC<ActionSectionProps> = ({
           ))}
       </div>
       {filterConfig && filterConfig.length > 0 && (
-        <Button variant="outline" onClick={handleShowMoreFilter} className={cn(filterConfig.length <= 2 && "lg:hidden")}>
+        <Button variant="outline" onClick={handleShowMoreFilter} className={cn(filterConfig.length <= 2 && 'lg:hidden')}>
           <Icon className="mr-2" iconName="filter_list" />
-          {showMoreFilters ? "Hide Filters" : "More Filters"}
+          {showMoreFilters ? 'Hide Filters' : 'More Filters'}
         </Button>
       )}
       <div className="hidden gap-3 lg:flex">

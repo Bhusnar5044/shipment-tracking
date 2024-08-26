@@ -1,14 +1,14 @@
-import { cn } from "@/utils";
-import type { FC } from "react";
-import { forwardRef, memo, useCallback, useContext } from "react";
-import { PopoverContext } from "../Popover.context";
-import { PopupClasses } from "./styled/Popup";
-import { PopoverPopupProps } from "./types";
+import { cn } from '@/utils';
+import type { FC } from 'react';
+import { forwardRef, memo, useCallback, useContext } from 'react';
+import { PopoverContext } from '../Popover.context';
+import { PopupClasses } from './styled/Popup';
+import { PopoverPopupProps } from './types';
 
 const Popup: FC<PopoverPopupProps> = memo(
   forwardRef(
     (
-      { placement = "bottom", withArrow, distance = "0px", fullWidth, fullHeight, bgColor = "gray-100", id = "popover-popup", className, ...rest },
+      { placement = 'bottom', withArrow, distance = '0px', fullWidth, fullHeight, bgColor = 'gray-100', id = 'popover-popup', className, ...rest },
       ref
     ) => {
       const [isOpen] = useContext(PopoverContext),
@@ -19,6 +19,6 @@ const Popup: FC<PopoverPopupProps> = memo(
   )
 );
 
-Popup.displayName = "Popup";
+Popup.displayName = 'Popup';
 
 export default Popup;

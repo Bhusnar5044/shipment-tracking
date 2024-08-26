@@ -46,10 +46,7 @@ const SingleSelect: FC<SingleSelectProps> = memo(
       label: '',
     });
 
-    const selectedOption = useMemo(
-      () => options?.find((option) => option.value === (value || defaultValue)),
-      [defaultValue, options, value]
-    );
+    const selectedOption = useMemo(() => options?.find((option) => option.value === (value || defaultValue)), [defaultValue, options, value]);
 
     useEffect(() => {
       if (selectedOption) {
@@ -96,9 +93,7 @@ const SingleSelect: FC<SingleSelectProps> = memo(
           option: savedOption.current,
           search: savedOption.current.label,
         });
-        setSearch(
-          savedOption.current.label ?? selectedOption?.label ?? value ?? ''
-        );
+        setSearch(savedOption.current.label ?? selectedOption?.label ?? value ?? '');
       }
     }, [name, onChange, searchInputCannotBeEmpty, selectedOption?.label, value]);
 
@@ -109,9 +104,7 @@ const SingleSelect: FC<SingleSelectProps> = memo(
         searchable && search
           ? options?.filter((option) => {
               const searchTerm = search?.toString()?.toLowerCase() ?? '';
-              const labelMatches = option.label
-                .toLowerCase()
-                .includes(searchTerm);
+              const labelMatches = option.label.toLowerCase().includes(searchTerm);
               const valueMatches =
                 typeof option.value === 'number'
                   ? option.value.toString().toLowerCase().includes(searchTerm)
@@ -125,20 +118,11 @@ const SingleSelect: FC<SingleSelectProps> = memo(
     );
 
     return (
-      <div
-        className={cn(
-          `w-full md:min-w-[${minWidth}] lg:max-w-[${maxWidth}]`,
-          { 'w-full': fullWidth },
-          className
-        )}
-      >
+      <div className={cn(`w-full md:min-w-[${minWidth}] lg:max-w-[${maxWidth}]`, { 'w-full': fullWidth }, className)}>
         <div id={`Select-${id}`} ref={ref} className="relative">
           <TextField
             id={`Select-${id}`}
-            className={cn(
-              'w-full rounded p-2 outline-none',
-              size === 'S' ? 'text-sm' : 'text-base'
-            )}
+            className={cn('w-full rounded p-2 outline-none', size === 'S' ? 'text-sm' : 'text-base')}
             type="text"
             variant={variant}
             onFocus={handleFocus}
@@ -150,9 +134,7 @@ const SingleSelect: FC<SingleSelectProps> = memo(
                   placeholder: focus ? 'Search...' : placeholder,
                 }
               : { placeholder })}
-            {...(enableRegister
-              ? register?.(name ?? '')
-              : { onChange: (_event: TextFieldEventType) => {} })}
+            {...(enableRegister ? register?.(name ?? '') : { onChange: (_event: TextFieldEventType) => {} })}
             value={selectedOption?.label ?? search ?? ''}
             readOnly={!searchable}
             {...(!hideExpandableIcon
@@ -161,10 +143,7 @@ const SingleSelect: FC<SingleSelectProps> = memo(
                     <Icon
                       onClick={() => setIsOpen((p) => !p)}
                       id={`Toggle-${id}`}
-                      className={cn(
-                        'relative cursor-pointer',
-                        isOpen ? 'rotate-180' : 'rotate-0'
-                      )}
+                      className={cn('relative cursor-pointer', isOpen ? 'rotate-180' : 'rotate-0')}
                       iconName="arrow_drop_down"
                     />
                   ),
@@ -183,11 +162,7 @@ const SingleSelect: FC<SingleSelectProps> = memo(
         </div>
 
         {error && (
-          <small
-            className={cn(
-              'mt-2 text-xs italic text-red-500'
-            )}
-          >
+          <small className={cn('mt-2 text-xs italic text-red-500')}>
             <p>{error}</p>
           </small>
         )}

@@ -2,33 +2,23 @@ import { forwardRef, memo } from 'react';
 
 import { cn } from '@/utils';
 
-import type {
-  ButtonEdges,
-  ButtonProps,
-  ButtonSizes,
-  ButtonVariant,
-  Ref,
-} from './types';
+import type { ButtonEdges, ButtonProps, ButtonSizes, ButtonVariant, Ref } from './types';
 
 // TODO: ADD customer theme and Dark Theme
 export const getVariant = (variant: ButtonVariant) => {
   switch (variant) {
-    case "solid":
+    case 'solid':
       return `text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800`;
-    case "outline":
+    case 'outline':
       return `bg-transparent text-sm font-medium text-gray-900 focus:outline-none rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`;
-    case "flat":
+    case 'flat':
       return `bg-transparent text-sm font-medium text-gray-900 focus:outline-none hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white`;
     default:
       return undefined;
   }
 };
 // used for Chip as well
-export const getSizes = (
-  size: ButtonSizes,
-  removePadding?: boolean,
-  variant?: ButtonVariant
-) => {
+export const getSizes = (size: ButtonSizes, removePadding?: boolean, variant?: ButtonVariant) => {
   const removePd = removePadding && variant && variant === 'flat';
   switch (size) {
     case 'XS':
@@ -83,13 +73,7 @@ export const Button = memo(
     );
 
     return (
-      <button
-        ref={ref}
-        className={merged}
-        type={type}
-        disabled={disabled}
-        {...rest}
-      >
+      <button ref={ref} className={merged} type={type} disabled={disabled} {...rest}>
         {isLoading ? (
           <>
             <svg

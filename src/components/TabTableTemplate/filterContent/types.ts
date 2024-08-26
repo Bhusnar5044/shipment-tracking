@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommonFilterProps } from "@/components/common/CommonFilter/types";
-import { Dispatch, SetStateAction } from "react";
+import { CommonFilterProps } from '@/components/common/CommonFilter/types';
+import { Dispatch, SetStateAction } from 'react';
 
 export interface Props {
   setQueryParams: (params: Partial<{ [key: string]: string | undefined }>) => void;
@@ -47,6 +47,6 @@ export interface ListWithFormFilterProps {
   clearFilter?: () => void;
   applyFilter?: () => void;
   filtersApplied: boolean;
-  onChange: CommonFilterProps["onChange"];
+  onChange: CommonFilterProps['onChange'];
   filters: { stationCode: string; vendorId: string; temporaryId: string; vendorName: string };
 }

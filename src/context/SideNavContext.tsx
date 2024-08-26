@@ -18,9 +18,7 @@ export const SideNavContextProvider: FC<Props> = memo(({ children }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const value = useMemo(() => ({ isExpanded, setIsExpanded }), [isExpanded]);
 
-  return (
-    <SideNavContext.Provider value={value}>{children}</SideNavContext.Provider>
-  );
+  return <SideNavContext.Provider value={value}>{children}</SideNavContext.Provider>;
 });
 
 SideNavContextProvider.displayName = 'SideNavContextProvider';

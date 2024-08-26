@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldValues, UseFormRegister } from "react-hook-form";
-import { SelectOption } from "../OptionContainer/types";
-import { Size, TextFieldVariant } from "../TextField/types";
+import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { SelectOption } from '../OptionContainer/types';
+import { Size, TextFieldVariant } from '../TextField/types';
 
 export type SingleSelectOptionEvent = {
   name: string;

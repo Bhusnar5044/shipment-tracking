@@ -1,8 +1,8 @@
-import Button from "@/components/common/Button";
-import CommonFilter from "@/components/common/CommonFilter";
-import { getRoleAndPermissions } from "@/utils/getRoleAndPermissions";
-import { FC } from "react";
-import { ListWithFormFilterProps } from "./types";
+import Button from '@/components/common/Button';
+import CommonFilter from '@/components/common/CommonFilter';
+import { getRoleAndPermissions } from '@/utils/getRoleAndPermissions';
+import { FC } from 'react';
+import { ListWithFormFilterProps } from './types';
 
 export const ListWithFormFilter: FC<ListWithFormFilterProps> = ({ clearFilter, applyFilter, filtersApplied = true, onChange, filters }) => {
   const { userRole } = getRoleAndPermissions();
@@ -19,13 +19,13 @@ export const ListWithFormFilter: FC<ListWithFormFilterProps> = ({ clearFilter, a
           isPrimary={false}
         />
         <CommonFilter
-          type={"searchAndSelect"}
+          type={'searchAndSelect'}
           label="Vendor/Aggregator"
           onChange={onChange}
-          stateKey={"vendorName"}
+          stateKey={'vendorName'}
           value={filters.vendorName}
           placeholder="Select Vendor"
-          isPrimary={userRole === "VENDOR"}
+          isPrimary={userRole === 'VENDOR'}
         />
       </div>
       {filtersApplied && (

@@ -39,16 +39,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
   }, [theme]);
 
-  const providerValue = React.useMemo(
-    () => ({ theme, toggleTheme }),
-    [theme, toggleTheme]
-  );
+  const providerValue = React.useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
 
-  return (
-    <ThemeContext.Provider value={providerValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={providerValue}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => React.useContext<IThemeContext>(ThemeContext);

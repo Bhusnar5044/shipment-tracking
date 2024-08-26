@@ -20,9 +20,7 @@ export type InteractionType = 'click' | 'hover';
 
 export type PopoverContextType = [
   boolean /** Current open state */,
-  React.Dispatch<
-    React.SetStateAction<boolean>
-  > /** Function to be called to toggle the open state */,
+  React.Dispatch<React.SetStateAction<boolean>> /** Function to be called to toggle the open state */,
 ];
 
 export type StaticProps = {

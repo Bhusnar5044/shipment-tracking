@@ -10,7 +10,7 @@ export interface AxiosReturn {
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 export async function fetch(config: AxiosRequestConfig, token?: string, noAuthorization?: boolean): Promise<AxiosReturn> {
   const { tokens = {} } = loadState('user') || {};
-  const {headers, url, ...restConfig} = config;
+  const { headers, url, ...restConfig } = config;
   try {
     const request = {
       ...restConfig,

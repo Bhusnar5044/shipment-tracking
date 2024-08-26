@@ -14,13 +14,19 @@ export const makeStore = () => {
       [shipmentTRackApi.reducerPath]: shipmentTRackApi.reducer,
       [createUpdateShipmentApi.reducerPath]: createUpdateShipmentApi.reducer,
       [createUpdateCustomerApi.reducerPath]: createUpdateCustomerApi.reducer,
-      [customerIdsApi.reducerPath]: customerIdsApi.reducer
-
+      [customerIdsApi.reducerPath]: customerIdsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat([listApi.middleware, shipmentDetailsApi.middleware, shipmentTRackApi.middleware, createUpdateShipmentApi.middleware, createUpdateCustomerApi.middleware, customerIdsApi.middleware]),
+      }).concat([
+        listApi.middleware,
+        shipmentDetailsApi.middleware,
+        shipmentTRackApi.middleware,
+        createUpdateShipmentApi.middleware,
+        createUpdateCustomerApi.middleware,
+        customerIdsApi.middleware,
+      ]),
   });
 };
 

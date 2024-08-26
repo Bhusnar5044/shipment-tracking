@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
-import { ButtonEdges, ButtonSizes } from "../Button/types";
+import { PropsWithChildren } from 'react';
+import { ButtonEdges, ButtonSizes } from '../Button/types';
 
 export interface ChipProps extends PropsWithChildren {
   label: string;

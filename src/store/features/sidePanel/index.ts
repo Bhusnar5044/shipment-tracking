@@ -2,11 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/store/store';
 
-import type {
-  SidePanelState,
-  SidePanelWithDataPayload,
-  UnknownObject,
-} from './types';
+import type { SidePanelState, SidePanelWithDataPayload, UnknownObject } from './types';
 
 const initialState = {
   isOpen: false,
@@ -26,10 +22,7 @@ export const sidePanelSlice = createSlice({
     openNestedSidePanel: (state) => {
       state.isNestedOpen = true;
     },
-    openSidePanelWithData: (
-      state,
-      action: PayloadAction<SidePanelWithDataPayload>,
-    ) => {
+    openSidePanelWithData: (state, action: PayloadAction<SidePanelWithDataPayload>) => {
       state.isOpen = true;
       state.sidePanelKey = action.payload.key;
       state.data = action.payload.data;

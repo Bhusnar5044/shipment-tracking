@@ -1,5 +1,5 @@
-import { FieldValues, UseFormRegister } from "react-hook-form";
-import { TextFieldVariant } from "../TextField/types";
+import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { TextFieldVariant } from '../TextField/types';
 
 export type Props = {
   size: 'S' | 'M';

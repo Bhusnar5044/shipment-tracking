@@ -15,10 +15,7 @@ const applyMasking = (value: string, mask: string): string => {
     const remainingMask = mask.substr(length - 1);
     const numberIndex = remainingMask.match(alphaNumericRegex)?.index;
 
-    newValue =
-      value.slice(0, -1) +
-      remainingMask.substr(0, numberIndex) +
-      value.slice(-1);
+    newValue = value.slice(0, -1) + remainingMask.substr(0, numberIndex) + value.slice(-1);
   } else if (specialCharsRegex.test(mask.charAt(length))) {
     // if user deletes the last special character
     newValue = value;
@@ -32,10 +29,7 @@ const applyMasking = (value: string, mask: string): string => {
   return newValue;
 };
 
-const getMaskedValue = (
-  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  mask: string
-) => {
+const getMaskedValue = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, mask: string) => {
   let maskedValue;
 
   const specialCharsRegex = /[^a-zA-Z0-9]/g; // NOSONAR

@@ -1,4 +1,4 @@
-import { Item } from "@/constants/globalNavItems";
+import { Item } from '@/constants/globalNavItems';
 
 export type Props = {
   item: Item;

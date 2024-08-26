@@ -1,11 +1,11 @@
-import {Button} from "@/components/common/Button";
-import CommonFilter from "@/components/common/CommonFilter";
-import FilterContainer from "@/components/common/FilterContainer";
-import { FilterConfig } from "@/constants/types";
-import { cn } from "@/utils";
-import { FC } from "react";
-import { getActionSectionComponent } from "../utils";
-import { FilterSectionProps } from "./types";
+import { Button } from '@/components/common/Button';
+import CommonFilter from '@/components/common/CommonFilter';
+import FilterContainer from '@/components/common/FilterContainer';
+import { FilterConfig } from '@/constants/types';
+import { cn } from '@/utils';
+import { FC } from 'react';
+import { getActionSectionComponent } from '../utils';
+import { FilterSectionProps } from './types';
 
 export const FilterSection: FC<FilterSectionProps> = ({
   serviceApiKey,
@@ -19,14 +19,14 @@ export const FilterSection: FC<FilterSectionProps> = ({
   const filterConfig = getActionSectionComponent(serviceApiKey);
   return (
     <div
-      style={{ display: showMoreFilters ? "block" : "none" }}
+      style={{ display: showMoreFilters ? 'block' : 'none' }}
       className={cn(
-        "absolute bottom-0 left-0 z-2 -mr-4 max-h-[calc(100vh-12rem)] w-screen overflow-y-auto pt-3 shadow-lg lg:static lg:top-0 lg:m-0 lg:w-full  lg:overflow-y-visible lg:pt-0 lg:shadow-none"
+        'absolute bottom-0 left-0 z-2 -mr-4 max-h-[calc(100vh-12rem)] w-screen overflow-y-auto pt-3 shadow-lg lg:static lg:top-0 lg:m-0 lg:w-full  lg:overflow-y-visible lg:pt-0 lg:shadow-none'
       )}
     >
       {filterConfig?.length && (
         <FilterContainer
-          className={cn("lg:max-h-auto flex max-h-96 flex-col gap-3 overflow-y-auto px-4  md:flex lg:overflow-y-visible lg:px-0 lg:pb-0")}
+          className={cn('lg:max-h-auto flex max-h-96 flex-col gap-3 overflow-y-auto px-4  md:flex lg:overflow-y-visible lg:px-0 lg:pb-0')}
         >
           <div className="grid w-full grid-cols-1 justify-between gap-4 md:grid-cols-2 lg:grid-cols-5">
             {filterConfig

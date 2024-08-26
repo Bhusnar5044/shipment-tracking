@@ -7,22 +7,13 @@ import { useCallback, useEffect, useRef } from 'react';
  * @param {(e: any) => void} onOuterClick function to be fired when user clicks outside
  * @param {React.MutableRefObject<any>} ref ref of the element
  */
-export const useOutsideClickNotifier = (
-  onOuterClick: (e: any) => void,
-  isVisible: boolean
-) => {
+export const useOutsideClickNotifier = (onOuterClick: (e: any) => void, isVisible: boolean) => {
   const ref = useRef<any>(null);
   const handleClick = useCallback(
     (e: any) => {
       const isReactDatePicker = e.target.closest('[data-testid = "Day"]');
 
-      if (
-        ref?.current &&
-        e.target.isConnected &&
-        !ref?.current?.contains(e.target) &&
-        !isReactDatePicker &&
-        isVisible
-      ) {
+      if (ref?.current && e.target.isConnected && !ref?.current?.contains(e.target) && !isReactDatePicker && isVisible) {
         onOuterClick(e);
       }
     },

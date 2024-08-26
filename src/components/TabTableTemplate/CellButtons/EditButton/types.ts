@@ -1,4 +1,4 @@
-import { UnknownObject } from "@/constants/types";
+import { UnknownObject } from '@/constants/types';
 
 export type Props = {
   data: UnknownObject;

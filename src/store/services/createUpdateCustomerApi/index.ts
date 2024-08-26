@@ -15,14 +15,14 @@ export const createUpdateCustomerApi = createApi({
   tagTypes: ['Post'],
   endpoints: (build) => ({
     updateCustomerPost: build.mutation<ICustomer, Partial<ICustomer> & Pick<ICustomer, '_id'>>({
-        // note: an optional `queryFn` may be used in place of `query`
-        query: ({ _id, ...patch }) => ({
-          url: _id ? urls.customerById(_id): urls.customers,
-          method: _id ? 'PUT': 'POST',
-          data: patch,
-        }),
-        invalidatesTags: ['Post'],
-      }),  
+      // note: an optional `queryFn` may be used in place of `query`
+      query: ({ _id, ...patch }) => ({
+        url: _id ? urls.customerById(_id) : urls.customers,
+        method: _id ? 'PUT' : 'POST',
+        data: patch,
+      }),
+      invalidatesTags: ['Post'],
+    }),
   }),
 });
 

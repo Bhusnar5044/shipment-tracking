@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from 'react';
 
 export interface StyleProps {
   className?: string;

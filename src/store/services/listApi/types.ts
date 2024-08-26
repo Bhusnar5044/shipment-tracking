@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ListUrlsKeys } from "@/constants/types";
+import { ListUrlsKeys } from '@/constants/types';
 
 // Added null type due to ReadOnlyLSearchParams type
 export type TableListDataQueryTypes = {

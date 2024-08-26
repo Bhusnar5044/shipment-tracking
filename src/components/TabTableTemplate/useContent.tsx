@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import useQueryParams from "@/hooks/useQueryParams";
-import { dateFormatterForApi } from "@/utils";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { DateRange } from "react-day-picker";
-import { queryParamsType, UseContentReturnProps } from "./types";
-import { useGetListQuery } from "@/store/services";
-import { ListUrlsKeys } from "@/constants/types";
+import { ListUrlsKeys } from '@/constants/types';
+import useQueryParams from '@/hooks/useQueryParams';
+import { useGetListQuery } from '@/store/services';
+import { dateFormatterForApi } from '@/utils';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { DateRange } from 'react-day-picker';
+import { UseContentReturnProps, queryParamsType } from './types';
 
 export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabType: string): UseContentReturnProps => {
   const [filters, setFilters] = useState<any>({});
@@ -13,12 +13,12 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   const { queryParams, setQueryParams } = useQueryParams<queryParamsType>(),
-    tab = queryParams?.get("tab") ?? defaultTab,
-    page = +(queryParams?.get("page") ?? 1),
-    size = +(queryParams?.get("size") ?? 10),
-    sort = queryParams?.get("sort"),
-    startDate = queryParams?.get("startDate"),
-    endDate = queryParams?.get("endDate"),
+    tab = queryParams?.get('tab') ?? defaultTab,
+    page = +(queryParams?.get('page') ?? 1),
+    size = +(queryParams?.get('size') ?? 10),
+    sort = queryParams?.get('sort'),
+    startDate = queryParams?.get('startDate'),
+    endDate = queryParams?.get('endDate'),
     status = queryParams?.get('status');
 
   const queryProps = useMemo(() => {
@@ -61,11 +61,11 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
     const params: Partial<{ [key: string]: string | undefined | boolean }> = {
       startDate,
       endDate,
-      page: "1",
+      page: '1',
     };
 
     for (const key in filters) {
-      if (filters[key] && typeof filters[key] === "string" && params[key] === undefined) {
+      if (filters[key] && typeof filters[key] === 'string' && params[key] === undefined) {
         params[key] = filters[key];
       }
     }
@@ -73,18 +73,15 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
     setQueryParams(params);
   }, [filters, setQueryParams]);
 
-  const clearFilter = useCallback(
-    () => {
-      setQueryParams({});
-      setFilters({});
-    },
-    [setQueryParams]
-  );
+  const clearFilter = useCallback(() => {
+    setQueryParams({});
+    setFilters({});
+  }, [setQueryParams]);
 
   const handleFilterChange = useCallback((key: string, value: any) => {
     setFilters((prevFilters: any) => ({
       ...prevFilters,
-      ...(key === "vendorName" ? value : { [key]: value }),
+      ...(key === 'vendorName' ? value : { [key]: value }),
     }));
   }, []);
 
@@ -104,11 +101,11 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
 
   return {
     queryParams,
-    selectedTab:tab,
+    selectedTab: tab,
     data,
     size,
     refetch,
-    status: status ?? "All",
+    status: status ?? 'All',
     setQueryParams,
     showMoreFilters,
     setShowMoreFilters,

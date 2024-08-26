@@ -15,32 +15,35 @@ import { useGetShipmentDetailsQuery } from '@/store/services/shipmentDetailsApi'
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const formInitialState:Partial<IShipment> = {
+const formInitialState: Partial<IShipment> = {
   customer: '',
   origin: '',
   destination: '',
   currentStatus: 'Pending',
   containerNumbers: [],
   shippingAgent: '',
-}
+};
 
 const CreateUpdateShipment: React.FC = () => {
-  const { id='' } = useParams<{ id: string }>();
+  const { id = '' } = useParams<{ id: string }>();
   const [skip, setSkip] = useState(true);
   const navigate = useNavigate();
   const [form, setForm] = useState<Partial<IShipment>>(formInitialState);
 
-  const {data} = useGetShipmentDetailsQuery({id}, {skip})
+  const { data } = useGetShipmentDetailsQuery({ id }, { skip });
 
-  const [updateShipmentPost] = useUpdateShipmentPostMutation()
+  const [updateShipmentPost] = useUpdateShipmentPostMutation();
 
-  const {data: customerIds} = useGetCustomerIdsQuery({});
+  const { data: customerIds } = useGetCustomerIdsQuery({});
 
-  const customerIdsOptions:SelectOption[] = useMemo(()=> customerIds?.map(item => ({label: item.email, value: item._id ?? item.email})) ?? [],[customerIds])
+  const customerIdsOptions: SelectOption[] = useMemo(
+    () => customerIds?.map((item) => ({ label: item.email, value: item._id ?? item.email })) ?? [],
+    [customerIds]
+  );
 
-  useEffect(()=>{
-    if(id) setSkip(prev => !prev) ;
-  },[id])
+  useEffect(() => {
+    if (id) setSkip((prev) => !prev);
+  }, [id]);
 
   useEffect(() => {
     if (data) {
@@ -56,25 +59,25 @@ const CreateUpdateShipment: React.FC = () => {
   }, [data]);
 
   const handleChange = (e: TextFieldEventType) => {
-    const {name, value} = e.target;
-    setForm((prev)=> ({ ...prev, [name]: value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleDateChange = (value: Date, name:string) => {
-    setForm(prev => ({...prev, [name]: value}))
-  }
+  const handleDateChange = (value: Date, name: string) => {
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSelectChange = (val: SingleSelectOptionEvent) => {
-    const {name,option} = val;
-    setForm((prev)=>({
+    const { name, option } = val;
+    setForm((prev) => ({
       ...prev,
-      [name]: option?.value as string
+      [name]: option?.value as string,
     }));
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-      await updateShipmentPost({_id: id ?? '', ...form});
+    await updateShipmentPost({ _id: id ?? '', ...form });
     navigate('/shipments');
   };
 
@@ -86,7 +89,7 @@ const CreateUpdateShipment: React.FC = () => {
       <form onSubmit={handleSubmit} className="max-w-2xl flex flex-col gap-4 p-8 bg-white rounded-lg shadow-lg">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <SingleSelect
-    variant="outlined"
+            variant="outlined"
             label="Select Customer"
             name="customer"
             value={form.shipmentId}
@@ -95,18 +98,10 @@ const CreateUpdateShipment: React.FC = () => {
             required
           />
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <TextField variant="outlined" label="Origin" type="text" name="origin" value={form.origin} onChange={handleChange} required />
           <TextField
-    variant="outlined"
-            label="Origin"
-            type="text"
-            name="origin"
-            value={form.origin}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-    variant="outlined"
+            variant="outlined"
             label="Destination"
             type="text"
             name="destination"
@@ -116,8 +111,8 @@ const CreateUpdateShipment: React.FC = () => {
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <SingleSelect
-    variant="outlined"
+          <SingleSelect
+            variant="outlined"
             label="Current Status"
             name="currentStatus"
             value={form.currentStatus}
@@ -128,36 +123,33 @@ const CreateUpdateShipment: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <DatePicker
-            size='M'
-            dateType='estimatedDeliveryDate'
-            label='Estimated Delivery Date'
+            size="M"
+            dateType="estimatedDeliveryDate"
+            label="Estimated Delivery Date"
             name="estimatedDeliveryDate"
             date={form.estimatedDeliveryDate}
             onChange={handleDateChange}
           />
         </div>
-          <TextField
-    variant="outlined"
-            label="Container Numbers"
-            type="text"
-            name="containerNumbers"
-            value={form?.containerNumbers?.join(', ') ?? ''}
-            onChange={(e) => setForm({ ...form, containerNumbers: e.target.value.split(', ') })}
-            required
-          />
-          <TextField
-    variant="outlined"
-            label='Shipping Agent'
-            type="text"
-            name="shippingAgent"
-            value={form.shippingAgent}
-            onChange={handleChange}
-            required
-          />
-        <Button
-          type="submit"
-          className='mt-4 self-start'
-        >
+        <TextField
+          variant="outlined"
+          label="Container Numbers"
+          type="text"
+          name="containerNumbers"
+          value={form?.containerNumbers?.join(', ') ?? ''}
+          onChange={(e) => setForm({ ...form, containerNumbers: e.target.value.split(', ') })}
+          required
+        />
+        <TextField
+          variant="outlined"
+          label="Shipping Agent"
+          type="text"
+          name="shippingAgent"
+          value={form.shippingAgent}
+          onChange={handleChange}
+          required
+        />
+        <Button type="submit" className="mt-4 self-start">
           {id ? 'Update Shipment' : 'Create Shipment'}
         </Button>
       </form>

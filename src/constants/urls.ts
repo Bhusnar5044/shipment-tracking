@@ -1,4 +1,3 @@
-
 export const urls = {
   login: '/login',
   signup: '/signup',
@@ -6,12 +5,11 @@ export const urls = {
   profile: '/profile',
   getShipments: '/shipments',
   customers: '/customers',
-  customerById: (id:string) => `/customers/${id}`,
+  customerById: (id: string) => `/customers/${id}`,
   shipmentDetails: (id: string) => `/shipments/${id}`,
-  shipmentTrack: (trackingId: string) => `/shipments/track/${trackingId}`
+  shipmentTrack: (trackingId: string) => `/shipments/track/${trackingId}`,
 };
 
-
 export const ListUrls = {
-  shipments: urls.getShipments
-}
+  shipments: urls.getShipments,
+};

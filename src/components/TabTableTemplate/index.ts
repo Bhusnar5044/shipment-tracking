@@ -1,1 +1,1 @@
-export { TabTableTemplate as default } from "./TabTableTemplate";
+export { TabTableTemplate as default } from './TabTableTemplate';

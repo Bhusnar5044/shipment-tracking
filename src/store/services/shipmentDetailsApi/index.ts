@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { urls } from '@/constants/urls';
 import { axiosBaseQuery } from '../service';
 import { ShipmentDetails } from './types';
-import { urls } from '@/constants/urls';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -13,7 +13,7 @@ export const shipmentDetailsApi = createApi({
     baseUrl: BASE_URL ?? '',
   }),
   endpoints: (build) => ({
-    getShipmentDetails: build.query<ShipmentDetails, {id:string}>({
+    getShipmentDetails: build.query<ShipmentDetails, { id: string }>({
       query: ({ id }) => {
         // const resultKey = keyResultMapping[key] as TableDataListTypeKey;
         return {

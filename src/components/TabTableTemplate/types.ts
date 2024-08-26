@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ListUrlsKeys } from "@/constants/types";
-import { TableListDataType } from "@/store/services/listApi/types";
-import { Dispatch, SetStateAction } from "react";
+import { ListUrlsKeys } from '@/constants/types';
+import { TableListDataType } from '@/store/services/listApi/types';
+import { Dispatch, SetStateAction } from 'react';
 
 export type Props = {
   storeKey?: string;

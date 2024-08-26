@@ -11,7 +11,7 @@ export type ModalProps = {
   modalClass?: string;
   showCloseMark?: boolean;
   contentFullScreen?: boolean;
-  alignment?: "bottom" | "center";
+  alignment?: 'bottom' | 'center';
   closeMarkClassName?: string;
   isBottomSheet?: boolean;
   styleForMenu?: boolean;

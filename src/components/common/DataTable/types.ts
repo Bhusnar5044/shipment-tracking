@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CellContext, ColumnDef, HeaderContext } from "@tanstack/react-table";
+import { CellContext, ColumnDef, HeaderContext } from '@tanstack/react-table';
 
 export interface ExtendedColumnTypes<TData> {
   accessorKey: string;

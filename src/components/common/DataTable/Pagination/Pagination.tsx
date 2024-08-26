@@ -1,10 +1,10 @@
-import { toast } from "@/components/common/Toast";
-import { FC, memo, MouseEvent, ReactElement, useCallback, useMemo, useState } from "react";
-import Button from "../../Button";
-import Icon from "../../Icon";
-import TextField from "../../TextField";
-import Typography from "../../Typography";
-import { Props } from "./types";
+import { toast } from '@/components/common/Toast';
+import { FC, memo, MouseEvent, ReactElement, useCallback, useMemo, useState } from 'react';
+import Button from '../../Button';
+import Icon from '../../Icon';
+import TextField from '../../TextField';
+import Typography from '../../Typography';
+import { Props } from './types';
 
 export const Pagination: FC<Props> = memo(({ table, onDownload, disableDownload, pageSize, totalCount, page, setQueryParams }) => {
   const [goto, setGoto] = useState<number>();
@@ -12,7 +12,7 @@ export const Pagination: FC<Props> = memo(({ table, onDownload, disableDownload,
   const handlePageNextPrev = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       const action = event.currentTarget.name;
-      const newPage = action === "prev" ? page - 1 : page + 1;
+      const newPage = action === 'prev' ? page - 1 : page + 1;
       setQueryParams({ page: newPage });
     },
     [page, setQueryParams]
@@ -32,7 +32,7 @@ export const Pagination: FC<Props> = memo(({ table, onDownload, disableDownload,
         setQueryParams({ page: pageNum });
         table.setPageIndex(pageNum - 1);
       } else {
-        toast.error(`${page ? "Page not found with number " + page : "Enter page number"}`);
+        toast.error(`${page ? 'Page not found with number ' + page : 'Enter page number'}`);
       }
     },
     [setQueryParams, table, totalPages]
@@ -50,7 +50,7 @@ export const Pagination: FC<Props> = memo(({ table, onDownload, disableDownload,
     for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
       result.push(
         <Button
-          variant={pageNum === page ? "solid" : "outline"}
+          variant={pageNum === page ? 'solid' : 'outline'}
           className={`hidden lg:flex`}
           size="XS"
           key={pageNum}
@@ -120,4 +120,4 @@ export const Pagination: FC<Props> = memo(({ table, onDownload, disableDownload,
   );
 });
 
-Pagination.displayName = "Pagination";
+Pagination.displayName = 'Pagination';

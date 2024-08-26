@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ColumnDef } from "@tanstack/react-table";
-import Typography from "../../Typography";
-import { ColumnTypes } from "../types";
+import { ColumnDef } from '@tanstack/react-table';
+import Typography from '../../Typography';
+import { ColumnTypes } from '../types';
 
 export const getColumns = (columnsArr: ColumnTypes<any>[]): ColumnDef<any>[] =>
   columnsArr.map((item) => ({

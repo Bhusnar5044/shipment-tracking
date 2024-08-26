@@ -1,19 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ChangeEvent, FC, KeyboardEvent } from 'react';
-import {
-  forwardRef,
-  memo,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { forwardRef, memo, useCallback, useMemo, useRef, useState } from 'react';
 
-import Icon from '../Icon';
-import Typography from '../Typography';
 import { useCombinedRefs } from '@/hooks/useCombinedRefs';
 import { useOutsideClickNotifier } from '@/hooks/useOutsideClickNotifier';
 import { cn } from '@/utils';
+import Icon from '../Icon';
+import Typography from '../Typography';
 
 import getMaskedValue from './getMaskedValue';
 import type { TextFieldProps } from './types';
@@ -66,21 +59,12 @@ const Component: FC<TextFieldProps> = memo(
     const inputAreaRef = useCombinedRefs<any>(ref, useRef());
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [inputVal, setInputVal] = useState<string>('');
-    const [characterCountValue, setCharacterCountValue] = useState(
-      value
-        ? value.toString().length
-        : restProps.defaultValue?.toString().length ?? 0
-    );
-    const isErrorPresent = useMemo(
-      () => !!errorText || !!errorMessage,
-      [errorText, errorMessage]
-    );
+    const [characterCountValue, setCharacterCountValue] = useState(value ? value.toString().length : restProps.defaultValue?.toString().length ?? 0);
+    const isErrorPresent = useMemo(() => !!errorText || !!errorMessage, [errorText, errorMessage]);
 
     const handleOnChange = useCallback(
       async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const valueString = event.target.value
-          ? event.target.value.toString()
-          : '';
+        const valueString = event.target.value ? event.target.value.toString() : '';
         setCharacterCountValue(valueString.length);
 
         if (regex) {
@@ -98,10 +82,8 @@ const Component: FC<TextFieldProps> = memo(
           const maskedValue = getMaskedValue(event, mask);
           event.target.value = maskedValue;
         }
-        if(enableOnEnter)
-         setInputVal(valueString);
-        else 
-         onChange?.(event);
+        if (enableOnEnter) setInputVal(valueString);
+        else onChange?.(event);
       },
       [enableOnEnter, mask, onChange, regex, title]
     );
@@ -148,38 +130,23 @@ const Component: FC<TextFieldProps> = memo(
 
     const inputId = useMemo(() => id ?? 'textField', [id]);
     const displayCharacterCount = useMemo(
-      () =>
-        !!(
-          withCharacterCount &&
-          showDecorators &&
-          props.maxLength &&
-          props.maxLength >= 0
-        ),
+      () => !!(withCharacterCount && showDecorators && props.maxLength && props.maxLength >= 0),
       [withCharacterCount, showDecorators, props.maxLength]
     );
 
     const validate = useCallback(
-      (
-        event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        eventFunc?: (e: any) => void
-      ) => {
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventFunc?: (e: any) => void) => {
         event.preventDefault();
         const element = event.target as HTMLInputElement;
         const validatorMessage = validator?.(element.value, event) || '';
-        const message = validator
-          ? validatorMessage
-          : element.validationMessage;
+        const message = validator ? validatorMessage : element.validationMessage;
         setErrorMessage(message);
         validator && inputRef.current?.setCustomValidity(validatorMessage);
         eventFunc?.(event);
       },
       [validator, inputRef]
     );
-    const handleOnBlur = useCallback(
-      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        validate(event, onBlur),
-      [validate, onBlur]
-    );
+    const handleOnBlur = useCallback((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => validate(event, onBlur), [validate, onBlur]);
 
     // to be edited for dynamic data for now using the vendorName hook here only
 
@@ -191,25 +158,9 @@ const Component: FC<TextFieldProps> = memo(
 
     return (
       <div ref={refs}>
-        {label && (
-          <label className={cn('form-label text-black', labelClass)}>
-            {label}
-          </label>
-        )}
-        <div
-          className={cn(
-            `relative`,
-          )}
-        >
-          {Prefix && (
-            <span
-              className={cn(
-                'pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2'
-              )}
-            >
-              {Prefix}
-            </span>
-          )}
+        {label && <label className={cn('form-label text-black', labelClass)}>{label}</label>}
+        <div className={cn(`relative`)}>
+          {Prefix && <span className={cn('pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2')}>{Prefix}</span>}
           {multiline ? (
             <textarea
               ref={inputAreaRef}
@@ -220,9 +171,7 @@ const Component: FC<TextFieldProps> = memo(
               value={value}
               rows={minRows}
               id={inputId}
-              {...(enableRegister
-                ? register?.(name ?? '')
-                : { onChange: handleOnChange, onBlur: handleOnBlur })}
+              {...(enableRegister ? register?.(name ?? '') : { onChange: handleOnChange, onBlur: handleOnBlur })}
               {...restProps}
             />
           ) : (
@@ -237,47 +186,24 @@ const Component: FC<TextFieldProps> = memo(
               disabled={disabled}
               id={inputId}
               {...(title && {
-                onInvalid: (e) =>
-                  (e.target as HTMLInputElement).setCustomValidity(title),
+                onInvalid: (e) => (e.target as HTMLInputElement).setCustomValidity(title),
               })}
               {...(regex && { pattern: regex })}
-              {...(enableRegister
-                ? register?.(name ?? '')
-                : { onChange: handleOnChange, onBlur: handleOnBlur })}
+              {...(enableRegister ? register?.(name ?? '') : { onChange: handleOnChange, onBlur: handleOnBlur })}
               {...restProps}
               // type={"number"}
             />
           )}
-          {Suffix && (
-            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-              {Suffix}
-            </span>
-          )}
+          {Suffix && <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">{Suffix}</span>}
           {enableOnSearch && (
-            <div
-              className={cn(
-                'absolute right-1 top-1/2 flex -translate-y-1/2 items-center justify-center text-center'
-              )}
-            >
-              {value && (
-                <Icon
-                  iconName="close"
-                  className={cn('text-gray-45 ml-2 h-8 w-8')}
-                  onClick={handleOnClear}
-                />
-              )}
-              <Icon
-                iconName="search"
-                className={cn('text-gray-45 ml-2 h-8 w-8')}
-              />
+            <div className={cn('absolute right-1 top-1/2 flex -translate-y-1/2 items-center justify-center text-center')}>
+              {value && <Icon iconName="close" className={cn('text-gray-45 ml-2 h-8 w-8')} onClick={handleOnClear} />}
+              <Icon iconName="search" className={cn('text-gray-45 ml-2 h-8 w-8')} />
             </div>
           )}
         </div>
         {displayCharacterCount && (
-          <Typography
-            variant="body4"
-            className={cn('mt-1 text-xs text-gray-500')}
-          >{`${characterCountValue}/${props.maxLength}`}</Typography>
+          <Typography variant="body4" className={cn('mt-1 text-xs text-gray-500')}>{`${characterCountValue}/${props.maxLength}`}</Typography>
         )}
         {isErrorPresent && (
           <Typography

@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { DateRange } from "react-day-picker";
-import { Size, TextFieldVariant } from "../TextField/types";
+import { ReactElement } from 'react';
+import { DateRange } from 'react-day-picker';
+import { Size, TextFieldVariant } from '../TextField/types';
 
 export interface Preset {
   name: string;

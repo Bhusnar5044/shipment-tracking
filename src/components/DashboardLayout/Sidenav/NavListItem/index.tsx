@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Icon from "@/components/common/Icon";
-import NavItem from "@/components/common/NavItem";
-import Popover from "@/components/common/Popover";
-import Typography from "@/components/common/Typography";
-import { cn } from "@/utils";
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { INavListItem } from "./types";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { closeSidePanel } from "@/store/features/sidePanel";
+import Icon from '@/components/common/Icon';
+import NavItem from '@/components/common/NavItem';
+import Popover from '@/components/common/Popover';
+import Typography from '@/components/common/Typography';
+import { closeSidePanel } from '@/store/features/sidePanel';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { cn } from '@/utils';
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { INavListItem } from './types';
 
 export const NavListItem: FC<INavListItem> = ({ navItem, isExpanded, setIsExpanded, userRole }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -26,7 +26,7 @@ export const NavListItem: FC<INavListItem> = ({ navItem, isExpanded, setIsExpand
     setIsHovered(true);
   };
   const handleMouseLeave = () => setIsHovered(false);
-  const { isOpen } = useAppSelector(state => state.sidePanel);
+  const { isOpen } = useAppSelector((state) => state.sidePanel);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (isOpen) {
@@ -56,16 +56,14 @@ export const NavListItem: FC<INavListItem> = ({ navItem, isExpanded, setIsExpand
             variant="body3"
             weight="medium"
           >
-              {navItem.icon && (
-                <Icon iconName={navItem.icon} className="w-8 text-2xl" />
-              )}
+            {navItem.icon && <Icon iconName={navItem.icon} className="w-8 text-2xl" />}
             <Typography variant="body3" weight="medium">
               {navItem.name}
             </Typography>
           </Typography>
           {isHovered && (
             <Popover.Popup style={styles} placement="left" className="left-10 w-[20rem] rounded p-3 text-start text-black shadow-lg lg:left-[100px]">
-              {nestedNavItems?.map((item:any, index:number) => {
+              {nestedNavItems?.map((item: any, index: number) => {
                 const lastItem = nestedNavItems.length - 1 === index;
                 return (
                   <div className="w-full text-start" key={item.slug}>
@@ -75,8 +73,8 @@ export const NavListItem: FC<INavListItem> = ({ navItem, isExpanded, setIsExpand
                       close={closeSidenav}
                       isExpanded={isExpanded}
                       className={cn(
-                        "h-14 w-full items-start justify-center rounded-none text-start text-sm font-medium text-black hover:bg-gray-15",
-                        { "border-b-2": !lastItem }
+                        'h-14 w-full items-start justify-center rounded-none text-start text-sm font-medium text-black hover:bg-gray-15',
+                        { 'border-b-2': !lastItem }
                       )}
                     />
                   </div>

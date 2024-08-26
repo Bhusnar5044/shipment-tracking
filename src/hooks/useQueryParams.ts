@@ -1,9 +1,8 @@
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function useQueryParams<T>() {
   const navigate = useNavigate();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const [searchParams] = useSearchParams() ?? undefined;
   const urlSearchParams = new URLSearchParams(searchParams?.toString());
 
@@ -25,7 +24,7 @@ export default function useQueryParams<T>() {
     }
 
     const search = urlSearchParams.toString();
-    const query = search ? `?${search}` : "";
+    const query = search ? `?${search}` : '';
     // replace since we don't want to build a history
     navigate(`${pathname}${query}`, { replace: true });
   }

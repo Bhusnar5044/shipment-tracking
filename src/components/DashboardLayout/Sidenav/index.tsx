@@ -1,9 +1,9 @@
-import type { FC } from 'react';
-import { useContext } from 'react';
 import { navLinks } from '@/constants/globalNavItems';
 import { SideNavContext } from '@/context/SideNavContext';
 import { cn } from '@/utils';
 import { getRoleAndPermissions } from '@/utils/getRoleAndPermissions';
+import type { FC } from 'react';
+import { useContext } from 'react';
 
 import { NavListItem } from './NavListItem';
 import SideNavHeader from './SidenavHeader';
@@ -26,12 +26,7 @@ const SideNav: FC = () => {
         <SideNavHeader isHovered={isExpanded} title="" />
         <ul className="no-scrollbar m-0 flex h-[calc(100vh-5rem)] list-none flex-col  gap-4 overflow-y-auto overflow-x-hidden pt-8">
           {navLinks.map((navItem) => {
-            return (
-              <NavListItem
-                key={navItem.name}
-                {...{ navItem, isExpanded, setIsExpanded, userRole }}
-              />
-            );
+            return <NavListItem key={navItem.name} {...{ navItem, isExpanded, setIsExpanded, userRole }} />;
           })}
         </ul>
       </nav>

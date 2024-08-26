@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 /**
  * Combines all the refs provided
@@ -15,7 +15,7 @@ export const useCombinedRefs = <T>(...refs: any[]) => {
     refs.forEach((ref) => {
       if (!ref) return;
 
-      if (typeof ref === "function") {
+      if (typeof ref === 'function') {
         ref(targetRef.current);
       } else {
         ref.current = targetRef.current;

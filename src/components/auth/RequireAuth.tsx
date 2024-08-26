@@ -6,19 +6,12 @@ type PrivateRouteProps = {
   redirectTo?: string;
 };
 
-const RequireAuth = ({
-  children,
-  redirectTo = '/login',
-}: PrivateRouteProps) => {
+const RequireAuth = ({ children, redirectTo = '/login' }: PrivateRouteProps) => {
   // add your own authentication logic here
-  const {token} = getRoleAndPermissions()
+  const { token } = getRoleAndPermissions();
   const isAuthenticated = !!token;
 
-  return isAuthenticated ? (
-    (children as React.ReactElement)
-  ) : (
-    <Navigate to={redirectTo} />
-  );
+  return isAuthenticated ? (children as React.ReactElement) : <Navigate to={redirectTo} />;
 };
 
 export default RequireAuth;

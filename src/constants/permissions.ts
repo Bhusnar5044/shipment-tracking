@@ -90,23 +90,9 @@ export const moduleRolePermissions = {
     'reports',
     'admin',
   ],
-  ADMIN_CC: [
-    'manage_pantry_rakes',
-    'pantry_rake_mapping',
-    'knowledge_base',
-    'menu',
-    'daily_schedule',
-  ],
+  ADMIN_CC: ['manage_pantry_rakes', 'pantry_rake_mapping', 'knowledge_base', 'menu', 'daily_schedule'],
 
-  call_center: [
-    'upcomingBulk',
-    'orders',
-    'vendors',
-    'feedbacks',
-    'knowledge_base',
-    'menu',
-    'daily_schedule',
-  ],
+  call_center: ['upcomingBulk', 'orders', 'vendors', 'feedbacks', 'knowledge_base', 'menu', 'daily_schedule'],
   vendor: [
     'dashboard',
     'orders',
@@ -130,14 +116,7 @@ export const moduleRolePermissions = {
     'pending_rds',
   ],
 
-  finance: [
-    'dashboard',
-    'vendors',
-    'finance_vendor_rds',
-    'finance_pg_rds',
-    'knowledge_base',
-    'reports',
-  ],
+  finance: ['dashboard', 'vendors', 'finance_vendor_rds', 'finance_pg_rds', 'knowledge_base', 'reports'],
 
   manager: [
     'dashboard',
@@ -211,14 +190,9 @@ export const OutletPermissions = {
   PENDING_OUTLET_READ: 'PENDING_OUTLET_READ',
   PENDING_OUTLET_WRITE: 'PENDING_OUTLET_WRITE',
   PENDING_OUTLET_DOC_UPLOAD: 'PENDING_OUTLET_DOC_UPLOAD',
-  PENDING_OUTLET_SUPERVISOR_STATUS_UPDATE:
-    'PENDING_OUTLET_SUPERVISOR_STATUS_UPDATE',
+  PENDING_OUTLET_SUPERVISOR_STATUS_UPDATE: 'PENDING_OUTLET_SUPERVISOR_STATUS_UPDATE',
   PENDING_OUTLET_MANAGER_STATUS_UPDATE: 'PENDING_OUTLET_MANAGER_STATUS_UPDATE',
-  PENDING_OUTLET_AGM_STATUS_UPDATE: [
-    'PENDING_OUTLET_AGM_STATUS_UPDATE',
-    'PENDING_OUTLET_ZONE_STATUS_UPDATE',
-    'PENDING_OUTLET_STATUS_UPDATE',
-  ],
+  PENDING_OUTLET_AGM_STATUS_UPDATE: ['PENDING_OUTLET_AGM_STATUS_UPDATE', 'PENDING_OUTLET_ZONE_STATUS_UPDATE', 'PENDING_OUTLET_STATUS_UPDATE'],
 };
 
 export const writePermissions = {

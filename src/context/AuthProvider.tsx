@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC, PropsWithChildren } from 'react';
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { urls } from '@/constants/urls';
-import { fetch, saveState, loadState } from '@/utils';
+import { fetch, loadState, saveState } from '@/utils';
 
 import type { IAuthContext } from './types';
 

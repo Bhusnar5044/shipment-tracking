@@ -7,30 +7,23 @@ import { useAppDispatch } from '@/store/hooks';
 
 import type { Props } from './types';
 
-export const ShowTabButton: FC<Props> = memo(
-  ({ sidePanelKey, displayKey, data }) => {
-    const dispatch = useAppDispatch();
+export const ShowTabButton: FC<Props> = memo(({ sidePanelKey, displayKey, data }) => {
+  const dispatch = useAppDispatch();
 
-    const handleButtonClick = useCallback(() => {
-      dispatch(
-        openSidePanelWithData({
-          data,
-          key: sidePanelKey,
-        }),
-      );
-    }, [data, dispatch, sidePanelKey]);
-
-    return (
-      <Button
-        size="M"
-        onClick={handleButtonClick}
-        variant="outline"
-        className="mx-2"
-      >
-        {displayKey}
-      </Button>
+  const handleButtonClick = useCallback(() => {
+    dispatch(
+      openSidePanelWithData({
+        data,
+        key: sidePanelKey,
+      })
     );
-  },
-);
+  }, [data, dispatch, sidePanelKey]);
+
+  return (
+    <Button size="M" onClick={handleButtonClick} variant="outline" className="mx-2">
+      {displayKey}
+    </Button>
+  );
+});
 
 ShowTabButton.displayName = 'ShowTabButton';

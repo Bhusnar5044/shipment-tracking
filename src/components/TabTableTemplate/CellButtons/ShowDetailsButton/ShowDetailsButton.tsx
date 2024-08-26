@@ -16,7 +16,7 @@ export const ShowDetailsButton: FC<Props> = memo(({ data, sidePanelKey }) => {
       openSidePanelWithData({
         data,
         key: sidePanelKey,
-      }),
+      })
     );
   }, [data, dispatch, sidePanelKey]);
 

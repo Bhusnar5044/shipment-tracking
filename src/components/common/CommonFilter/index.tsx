@@ -1,19 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CommonFilterProps, DateRange } from "./types";
-import DateRangePicker from "@/components/common/DateRangePicker";
-import SingleSelect from "@/components/common/SingleSelect";
-import { SingleSelectOptionEvent } from "@/components/common/SingleSelect/types";
-import TextField from "@/components/common/TextField";
-import { TextFieldEventType } from "@/components/common/TextField/types";
-import { FC, useCallback } from "react";
+import DateRangePicker from '@/components/common/DateRangePicker';
+import SingleSelect from '@/components/common/SingleSelect';
+import { SingleSelectOptionEvent } from '@/components/common/SingleSelect/types';
+import TextField from '@/components/common/TextField';
+import { TextFieldEventType } from '@/components/common/TextField/types';
+import { FC, useCallback } from 'react';
+import { CommonFilterProps, DateRange } from './types';
 
 const CommonFilter: FC<CommonFilterProps> = ({ type, label, placeholder, options, value, onChange, isPrimary }) => {
-
-  const initialDateFrom = typeof value === "object" && value !== null && "from" in value ? value.from : undefined;
-  const initialDateTo = typeof value === "object" && value !== null && "to" in value ? value.to : undefined;
+  const initialDateFrom = typeof value === 'object' && value !== null && 'from' in value ? value.from : undefined;
+  const initialDateTo = typeof value === 'object' && value !== null && 'to' in value ? value.to : undefined;
 
   const optionsArray = options || [];
-  const name = label ? label.toLowerCase().replace(/\s+/g, "-") : "select";
+  const name = label ? label.toLowerCase().replace(/\s+/g, '-') : 'select';
 
   const handleDateUpdate = useCallback(
     (dateRange: DateRange) => {
@@ -24,7 +23,7 @@ const CommonFilter: FC<CommonFilterProps> = ({ type, label, placeholder, options
 
   const handleSingleSelectChange = useCallback(
     (value: SingleSelectOptionEvent) => {
-      onChange(value.option?.value || "");
+      onChange(value.option?.value || '');
     },
     [onChange]
   );
@@ -36,10 +35,9 @@ const CommonFilter: FC<CommonFilterProps> = ({ type, label, placeholder, options
     [onChange]
   );
 
-
   const getField = useCallback(() => {
     switch (type) {
-      case "dateRange":
+      case 'dateRange':
         return (
           <DateRangePicker
             onUpdate={handleDateUpdate}
@@ -51,7 +49,7 @@ const CommonFilter: FC<CommonFilterProps> = ({ type, label, placeholder, options
             size="S"
           />
         );
-      case "singleSelect":
+      case 'singleSelect':
         return (
           <SingleSelect
             name={name}
@@ -64,13 +62,13 @@ const CommonFilter: FC<CommonFilterProps> = ({ type, label, placeholder, options
             hideExpandableIcon
           />
         );
-      case "textField":
+      case 'textField':
         return (
           <TextField
             onChange={handleTextFieldChange}
             variant="outlined"
             label={label}
-            value={value ? value : ""}
+            value={value ? value : ''}
             disableBottomMargin
             size="S"
             maxWidth="15rem"
@@ -83,9 +81,21 @@ const CommonFilter: FC<CommonFilterProps> = ({ type, label, placeholder, options
       default:
         return null;
     }
-  }, [handleDateUpdate, handleSingleSelectChange, handleTextFieldChange, initialDateFrom, initialDateTo, label, name, optionsArray, placeholder, type, value]);
+  }, [
+    handleDateUpdate,
+    handleSingleSelectChange,
+    handleTextFieldChange,
+    initialDateFrom,
+    initialDateTo,
+    label,
+    name,
+    optionsArray,
+    placeholder,
+    type,
+    value,
+  ]);
 
-  return <div className={isPrimary ? "block lg:hidden" : ""}>{getField()}</div>;
+  return <div className={isPrimary ? 'block lg:hidden' : ''}>{getField()}</div>;
 };
 
 export default CommonFilter;

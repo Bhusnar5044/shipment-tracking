@@ -8,11 +8,8 @@ export type Size = 'S' | 'M';
 export type TextFieldVariant = 'outlined' | 'filled';
 export type Edges = 'square' | 'rounded';
 
-export type TextFieldEventType = ChangeEvent<
-  HTMLInputElement | HTMLTextAreaElement
->;
-export interface TextFieldProps
-  extends Omit<HTMLProps<any>, 'prefix' | 'size' | 'height' | 'onChange'> {
+export type TextFieldEventType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+export interface TextFieldProps extends Omit<HTMLProps<any>, 'prefix' | 'size' | 'height' | 'onChange'> {
   /** Input variants */
   variant?: TextFieldVariant;
   /** Input edges */
