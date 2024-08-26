@@ -6,14 +6,20 @@ import Typography from '@/components/common/Typography';
 import { closeSidePanel } from '@/store/features/sidePanel';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { cn } from '@/utils';
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useCallback, useMemo, useRef, useState } from 'react';
 import { INavListItem } from './types';
 
 export const NavListItem: FC<INavListItem> = ({ navItem, isExpanded, setIsExpanded, userRole }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [styles, setStyles] = useState({});
   const menuItemRef = useRef<HTMLLIElement>(null);
-  const closeSidenav = useCallback(() => setIsExpanded?.(false), [setIsExpanded]);
+  const { isOpen } = useAppSelector((state) => state.sidePanel);
+  const dispatch = useAppDispatch();
+
+  const closeSidenav = useCallback(() => {
+    isOpen && dispatch(closeSidePanel());
+    setIsExpanded?.(false);
+  }, [setIsExpanded, isOpen, dispatch]);
 
   const handleMouseEnter = () => {
     if (menuItemRef?.current) {
@@ -26,13 +32,7 @@ export const NavListItem: FC<INavListItem> = ({ navItem, isExpanded, setIsExpand
     setIsHovered(true);
   };
   const handleMouseLeave = () => setIsHovered(false);
-  const { isOpen } = useAppSelector((state) => state.sidePanel);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (isOpen) {
-      dispatch(closeSidePanel());
-    }
-  }, [dispatch, isOpen]);
+
   const navItemsLength = navItem?.items?.length;
   const navPermissionLength = navItem.routePermission?.length;
 
