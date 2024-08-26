@@ -40,7 +40,8 @@
     "react-router-dom": "^6.23.0",
     "react-window": "^1.8.10",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-grid-area": "^1.0.10"
+    "tailwindcss-grid-area": "^1.0.10",
+    "turbo": "2.0.14"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.2.2",
