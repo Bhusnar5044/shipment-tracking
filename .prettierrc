@@ -1,0 +1,13 @@
+{
+  "endOfLine": "lf",
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "printWidth": 150,
+  "trailingComma": "es5",
+  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
+  "tailwindFunctions": ["clsx", "cn", "cva"],
+  "pluginSearchDirs": false,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
