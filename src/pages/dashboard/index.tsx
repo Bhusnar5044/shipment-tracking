@@ -1,7 +1,8 @@
 import Dashboard from '@/components/Dashboard';
 import PageContent from '@/components/DashboardLayout/PageContent';
+import React from 'react';
 
-const DashboardPage = () => {
+const DashboardPage: React.FC = () => {
   return (
     <PageContent>
       <Dashboard />
