@@ -33,9 +33,8 @@ const formInitialState: Partial<IShipment> = {
 const CreateUpdateShipment: React.FC = () => {
   const { id = '' } = useParams<{ id: string }>();
   const [skip, setSkip] = useState(true);
-  const navigate = useNavigate();
   const [form, setForm] = useState<Partial<IShipment>>(formInitialState);
-
+  const navigate = useNavigate();
   const { data } = useGetShipmentDetailsQuery({ id }, { skip });
 
   const [updateShipmentPost, { isLoading }] = useUpdateShipmentPostMutation();
@@ -90,9 +89,9 @@ const CreateUpdateShipment: React.FC = () => {
     e.preventDefault();
     const response = await updateShipmentPost({ _id: id ?? '', ...form });
     console.log({ response });
-    if (response) {
-      toast('Shipment created successfully');
-      navigate(keyPaths.shipments);
+    if (response?.data) {
+      toast.success('Shipment created successfully');
+      id && navigate(keyPaths.shipments);
     }
   };
 
@@ -112,6 +111,7 @@ const CreateUpdateShipment: React.FC = () => {
             onChange={handleSelectChange}
             fullWidth
             required
+            disabled={!!id}
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
