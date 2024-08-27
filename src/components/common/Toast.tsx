@@ -1,5 +1,3 @@
-import hotToast, { Toaster as HotToaster } from 'react-hot-toast';
-
-export const Toaster = HotToaster;
+import hotToast from 'react-hot-toast';
 
 export const toast = hotToast;

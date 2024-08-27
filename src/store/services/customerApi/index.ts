@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { ResponseMessage } from '@/constants/types';
 import { urls } from '@/constants/urls';
 import { axiosBaseQuery } from '../service';
 import { CustomerIds, ICustomer } from './types';
@@ -20,7 +21,7 @@ export const customerApi = createApi({
         };
       },
     }),
-    updateCustomerPost: build.mutation<ICustomer, Partial<ICustomer> & Pick<ICustomer, '_id'>>({
+    updateCustomerPost: build.mutation<ICustomer | ResponseMessage, Partial<ICustomer> & Pick<ICustomer, '_id'>>({
       // note: an optional `queryFn` may be used in place of `query`
       query: ({ _id, ...patch }) => ({
         url: _id ? urls.customerById(_id) : urls.customers,

@@ -2,7 +2,7 @@
 'use client';
 
 import type { FC } from 'react';
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useOutsideClickNotifier } from '@/hooks/useOutsideClickNotifier';
 import { cn } from '@/utils';
@@ -16,7 +16,7 @@ import type { SingleSelectProps } from './types';
 
 const SingleSelect: FC<SingleSelectProps> = memo(
   ({
-    searchInputCannotBeEmpty = false,
+    // searchInputCannotBeEmpty = false,
     name,
     placeholder = 'Search...',
     options,
@@ -38,21 +38,21 @@ const SingleSelect: FC<SingleSelectProps> = memo(
     id,
     // labelClass,
   }) => {
-    const [search, setSearch] = useState<string>(value);
+    const [search, setSearch] = useState<string>('');
     const [isOpen, setIsOpen] = useState(false);
     const [focus, setFocus] = useState(false);
-    const savedOption = useRef<{ value: number | string; label: string }>({
-      value: '',
-      label: '',
-    });
+    // const savedOption = useRef<{ value: number | string; label: string }>({
+    //   value: '',
+    //   label: '',
+    // });
 
     const selectedOption = useMemo(() => options?.find((option) => option.value === (value || defaultValue)), [defaultValue, options, value]);
 
-    useEffect(() => {
-      if (selectedOption) {
-        savedOption.current = selectedOption;
-      }
-    }, [selectedOption]);
+    // useEffect(() => {
+    //   if (selectedOption) {
+    //     savedOption.current = selectedOption;
+    //   }
+    // }, [selectedOption]);
 
     const handleFocus = useCallback(() => {
       setIsOpen(true);
@@ -61,18 +61,17 @@ const SingleSelect: FC<SingleSelectProps> = memo(
 
     const handleSearch = useCallback(
       (event: TextFieldEventType) => {
-        if (searchable) {
-          const { value } = event.target;
-          setSearch(value);
-          onChange?.({ name, search: value });
-        }
+        const { value } = event.target;
+        console.log('called', value);
+        setSearch(value);
+        onChange?.({ name, search: value });
       },
-      [name, onChange, searchable]
+      [name, onChange]
     );
 
     const handleOptionClick = (option: SelectOption) => {
       onChange?.({ name, option, search: option.label });
-      savedOption.current = option;
+      // savedOption.current = option;
       setSearch('');
       setIsOpen(false);
       setFocus(false);
@@ -87,15 +86,23 @@ const SingleSelect: FC<SingleSelectProps> = memo(
     const handleOutsideClick = useCallback(() => {
       setIsOpen(false);
       setFocus(false);
-      if (searchInputCannotBeEmpty) {
-        onChange?.({
-          name,
-          option: savedOption.current,
-          search: savedOption.current.label,
-        });
-        setSearch(savedOption.current.label ?? selectedOption?.label ?? value ?? '');
-      }
-    }, [name, onChange, searchInputCannotBeEmpty, selectedOption?.label, value]);
+      // if (searchInputCannotBeEmpty) {
+      //   onChange?.({
+      //     name,
+      //     option: savedOption.current,
+      //     search: savedOption.current.label,
+      //   });
+      //   setSearch(savedOption.current.label ?? selectedOption?.label ?? value ?? '');
+      // }
+    }, []);
+
+    const handleOnClear = useCallback(() => {
+      onChange?.({
+        name,
+        search: '',
+      });
+      setSearch('');
+    }, [name, onChange]);
 
     const ref = useOutsideClickNotifier(handleOutsideClick, isOpen);
 
@@ -117,6 +124,10 @@ const SingleSelect: FC<SingleSelectProps> = memo(
       [options, search, searchable]
     );
 
+    useEffect(() => {
+      console.log(searchable, search, selectedOption);
+    }, [search, searchable, selectedOption]);
+
     return (
       <div className={cn(`w-full md:min-w-[${minWidth}] lg:max-w-[${maxWidth}]`, { 'w-full': fullWidth }, className)}>
         <div id={`Select-${id}`} ref={ref} className="relative">
@@ -132,11 +143,13 @@ const SingleSelect: FC<SingleSelectProps> = memo(
               ? {
                   onChange: handleSearch,
                   placeholder: focus ? 'Search...' : placeholder,
+                  enableOnSearch: true,
+                  hideSearchIcon: true,
+                  onClear: handleOnClear,
                 }
               : { placeholder })}
-            {...(enableRegister ? register?.(name ?? '') : { onChange: (_event: TextFieldEventType) => {} })}
-            value={selectedOption?.label ?? search ?? ''}
-            readOnly={!searchable}
+            {...(enableRegister ? register?.(name ?? '') : {})}
+            value={(selectedOption?.label || search) ?? ''}
             {...(!hideExpandableIcon
               ? {
                   suffix: (

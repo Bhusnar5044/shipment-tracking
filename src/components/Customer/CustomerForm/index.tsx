@@ -30,7 +30,7 @@ const initialFormState: Partial<ICustomer> = {
 const CustomerOnboardingForm: React.FC = () => {
   const [form, setForm] = useState<Partial<ICustomer>>(initialFormState);
   const { id } = useParams();
-  const [updateCustomerPost] = useUpdateCustomerPostMutation();
+  const [updateCustomerPost, { isLoading }] = useUpdateCustomerPostMutation();
   const handleChange = (e: TextFieldEventType) => {
     const { name, value } = e.target;
     setForm((prev) => ({
@@ -88,6 +88,7 @@ const CustomerOnboardingForm: React.FC = () => {
             name="companyName"
             value={form.companyName}
             onChange={handleChange}
+            fullWidth
             required
           />
           <TextField
@@ -97,15 +98,26 @@ const CustomerOnboardingForm: React.FC = () => {
             name="contactName"
             value={form.contactName}
             onChange={handleChange}
+            fullWidth
             required
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <TextField variant="outlined" label="Email" type="email" name="email" value={form.email} onChange={handleChange} required />
-          <TextField variant="outlined" label="Phone" type="tel" name="phone" value={form.phone} onChange={handleChange} required />
+          <TextField fullWidth variant="outlined" label="Email" type="email" name="email" value={form.email} onChange={handleChange} required />
+          <TextField fullWidth variant="outlined" label="Phone" type="tel" name="phone" value={form.phone} onChange={handleChange} required />
         </div>
-
-        <TextField variant="outlined" label="password" type="password" name="password" value={form.password} onChange={handleChange} required />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="password"
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <SingleSelect
             variant="outlined"
@@ -115,7 +127,9 @@ const CustomerOnboardingForm: React.FC = () => {
             onChange={handleCountryChange}
             options={countries}
             searchable
+            hideExpandableIcon
             required
+            fullWidth
           />
           <TextField
             variant="outlined"
@@ -125,22 +139,44 @@ const CustomerOnboardingForm: React.FC = () => {
             value={form.address?.street}
             onChange={handleAddressChange}
             required
+            fullWidth
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <TextField variant="outlined" label="City" type="text" name="city" value={form.address?.city} onChange={handleAddressChange} required />
-          <TextField variant="outlined" label="State" type="text" name="state" value={form.address?.state} onChange={handleAddressChange} required />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="City"
+            type="text"
+            name="city"
+            value={form.address?.city}
+            onChange={handleAddressChange}
+            required
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="State"
+            type="text"
+            name="state"
+            value={form.address?.state}
+            onChange={handleAddressChange}
+            required
+          />
         </div>
-        <TextField
-          variant="outlined"
-          label="Zip Code"
-          type="text"
-          name="zipCode"
-          value={form.address?.zipCode}
-          onChange={handleAddressChange}
-          required
-        />
-        <Button className="mt-4 self-start" type="submit">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <TextField
+            variant="outlined"
+            label="Zip Code"
+            type="text"
+            name="zipCode"
+            value={form.address?.zipCode}
+            onChange={handleAddressChange}
+            required
+            fullWidth
+          />
+        </div>
+        <Button isLoading={isLoading} className="mt-4 self-start" type="submit">
           Onboard Customer
         </Button>
       </form>

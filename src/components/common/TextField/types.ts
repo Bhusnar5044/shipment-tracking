@@ -79,6 +79,7 @@ export interface TextFieldProps extends Omit<HTMLProps<any>, 'prefix' | 'size' |
   labelClass?: string;
   /** regex for the input field */
   regex?: string;
+  hideSearchIcon?: boolean;
 }
 
 export type suggestion = {

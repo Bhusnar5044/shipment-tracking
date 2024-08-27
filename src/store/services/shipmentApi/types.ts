@@ -3,7 +3,7 @@ import { ShipmentStatus } from '@/constants/types';
 export interface IShipment {
   _id?: string;
   shipmentId: string;
-  customer: string;
+  customerId: string;
   origin: string;
   destination: string;
   currentStatus: ShipmentStatus;

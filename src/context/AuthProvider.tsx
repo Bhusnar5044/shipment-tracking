@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC, PropsWithChildren } from 'react';
-import { createContext, useCallback, useContext, useMemo } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { loadState, saveState } from '@/utils';
@@ -8,17 +8,19 @@ import { loadState, saveState } from '@/utils';
 import { keyPaths } from '@/constants/globalNavItems';
 import type { IAuthContext } from './types';
 
-const initialValue = { tokens: {}, profileInfo: {} };
+const initialValue = { tokenData: {}, user: {} };
 
 const AuthContext = createContext<IAuthContext>(initialValue);
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
   const { redirectTo } = useParams();
+  const [value, setValue] = useState();
 
   const login = useCallback(
     async (data: any) => {
       saveState('user', data);
+      setValue(data.data);
       const {
         user: { role },
       } = data.data;
@@ -31,19 +33,20 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const logout = useCallback(() => {
     saveState('user', {});
+    setValue(undefined);
     navigate('/', { replace: true });
   }, [navigate]);
 
-  const value = useMemo(() => {
-    const user = loadState('user');
+  const memoValue = useMemo(() => {
+    const storeValue = loadState('user')?.data ?? { user: {}, tokenData: {} };
     return {
-      ...user,
+      ...(value ?? storeValue),
       login,
       logout,
     };
-  }, [login, logout]);
+  }, [login, logout, value]);
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={memoValue}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {

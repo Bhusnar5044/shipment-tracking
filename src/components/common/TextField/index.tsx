@@ -51,6 +51,7 @@ const Component: FC<TextFieldProps> = memo(
       labelClass,
       regex,
       title,
+      hideSearchIcon,
       ...restProps
     } = props;
 
@@ -59,7 +60,9 @@ const Component: FC<TextFieldProps> = memo(
     const inputAreaRef = useCombinedRefs<any>(ref, useRef());
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [inputVal, setInputVal] = useState<string>('');
-    const [characterCountValue, setCharacterCountValue] = useState(value ? value.toString().length : restProps.defaultValue?.toString().length ?? 0);
+    const [characterCountValue, setCharacterCountValue] = useState(
+      value ? value.toString().length : (restProps.defaultValue?.toString().length ?? 0)
+    );
     const isErrorPresent = useMemo(() => !!errorText || !!errorMessage, [errorText, errorMessage]);
 
     const handleOnChange = useCallback(
@@ -116,7 +119,7 @@ const Component: FC<TextFieldProps> = memo(
       else if (variant === 'filled') variantBaseClass = 'bg-gray-100';
 
       return cn(
-        `form-input max-h-[2.35rem] text-black md:min-w-[${minWidth}] lg:max-w-[${maxWidth}] min-h-8`,
+        `form-input max-h-[2.35rem] py-[0.55rem] text-black md:min-w-[${minWidth}] lg:max-w-[${maxWidth}] min-h-8`,
         Prefix ? 'pl-10' : 'pl-3',
         'rounded',
         borderClass,
@@ -159,7 +162,7 @@ const Component: FC<TextFieldProps> = memo(
     return (
       <div ref={refs}>
         {label && <label className={cn('form-label text-black', labelClass)}>{label}</label>}
-        <div className={cn(`relative`)}>
+        <div className={cn(`relative flex justify-between`, { 'mt-1': label })}>
           {Prefix && <span className={cn('pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2')}>{Prefix}</span>}
           {multiline ? (
             <textarea
@@ -196,9 +199,9 @@ const Component: FC<TextFieldProps> = memo(
           )}
           {Suffix && <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">{Suffix}</span>}
           {enableOnSearch && (
-            <div className={cn('absolute right-1 top-1/2 flex -translate-y-1/2 items-center justify-center text-center')}>
-              {value && <Icon iconName="close" className={cn('text-gray-45 ml-2 h-8 w-8')} onClick={handleOnClear} />}
-              <Icon iconName="search" className={cn('text-gray-45 ml-2 h-8 w-8')} />
+            <div className={cn('absolute right-3 top-1/2 flex -translate-y-1/2 items-center justify-center text-center')}>
+              {value && <Icon iconName="close" className={cn('text-gray-45 text-xs')} onClick={handleOnClear} />}
+              {!hideSearchIcon && <Icon iconName="search" className={cn('text-gray-45 ml-2 h-8 w-8')} />}
             </div>
           )}
         </div>

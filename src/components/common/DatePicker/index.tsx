@@ -37,11 +37,11 @@ const DatePicker: FC<Props> = memo(
         borderClass = 'border-red-500';
         focusClass = 'focus:border-red-500';
       } else {
-        borderClass = 'border-gray-300';
+        borderClass = 'border-gray-500';
         focusClass = 'focus:border-blue-500';
       }
       return cn(
-        'form-input rounded text-black max-h-[2.35rem]',
+        'form-input rounded text-black max-h-[2.35rem] py-[0.55rem]',
         borderClass,
         focusClass,
         size === 'S' ? 'text-sm' : 'text-base',
@@ -51,9 +51,9 @@ const DatePicker: FC<Props> = memo(
     }, [isErrorPresent, size, variant, className]);
 
     return (
-      <div className={`relative ${fullWidth ? 'w-full' : ''}`} style={{ minWidth, maxWidth }}>
+      <div className={`relative ${fullWidth ? 'w-full' : ''}`}>
         {label && <label className="form-label">{label}</label>}
-        <Popover interactionType="click">
+        <Popover interactionType="click" className={cn({ 'mt-1': label })}>
           <Button
             variant={'outline'}
             className={cn(

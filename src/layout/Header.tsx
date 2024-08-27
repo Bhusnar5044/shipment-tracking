@@ -2,12 +2,10 @@ import AncLink from '@/components/common/AncLink';
 import Button from '@/components/common/Button';
 import ThemeToggle from '@/components/theme-toggle';
 import { useAuth } from '@/context/AuthProvider';
-import { getRoleAndPermissions } from '@/utils/getRoleAndPermissions';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const { logout } = useAuth();
-  const { token } = getRoleAndPermissions();
+  const { logout, tokenData } = useAuth();
 
   return (
     <header className="fixed shadow w-full z-10">
@@ -17,7 +15,7 @@ const Header = () => {
             <img src="/assets/images/ShipmentTrackerLogo.svg" className="mr-3 h-12 sm:h-9 text-2xl" alt="Logo" />
           </AncLink>
           <div className="flex items-center lg:order-2">
-            {!token ? (
+            {!tokenData?.token ? (
               <Link
                 to="/login"
                 className="inline-flex items-center text-base font-medium text-purple-600 hover:text-purple-800 dark:text-purple-500 dark:hover:text-purple-700"
@@ -25,7 +23,7 @@ const Header = () => {
                 Log in / Register
               </Link>
             ) : (
-              <Button variant="flat" to="/login" onClick={logout}>
+              <Button variant="flat" onClick={logout}>
                 Log out
               </Button>
             )}
@@ -56,7 +54,7 @@ const Header = () => {
           </div>
           <div className="hidden w-full items-center justify-between lg:order-1 lg:flex lg:w-auto" id="mobile-menu-2">
             <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
-              {token && (
+              {tokenData?.token && (
                 <li>
                   <Link
                     to="/dashboard"

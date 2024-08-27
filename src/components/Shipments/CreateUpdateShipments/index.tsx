@@ -17,7 +17,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const formInitialState: Partial<IShipment> = {
-  customer: '',
+  customerId: '',
   origin: '',
   destination: '',
   currentStatus: 'Pending',
@@ -38,12 +38,12 @@ const CreateUpdateShipment: React.FC = () => {
 
   const { data } = useGetShipmentDetailsQuery({ id }, { skip });
 
-  const [updateShipmentPost] = useUpdateShipmentPostMutation();
+  const [updateShipmentPost, { isLoading }] = useUpdateShipmentPostMutation();
 
   const { data: customerIds } = useGetCustomerIdsQuery({});
 
   const customerIdsOptions: SelectOption[] = useMemo(
-    () => customerIds?.map((item) => ({ label: item.email, value: item._id ?? item.email })) ?? [],
+    () => customerIds?.map((item) => ({ label: item.email, value: item.email })) ?? [],
     [customerIds]
   );
 
@@ -105,16 +105,17 @@ const CreateUpdateShipment: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <SingleSelect
             variant="outlined"
-            label="Select Customer"
-            name="customer"
-            value={form.customer}
+            label="Select customerId"
+            name="customerId"
+            value={form.customerId}
             options={customerIdsOptions}
             onChange={handleSelectChange}
+            fullWidth
             required
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <TextField variant="outlined" label="Origin" type="text" name="origin" value={form.origin} onChange={handleChange} required />
+          <TextField variant="outlined" label="Origin" type="text" name="origin" value={form.origin} fullWidth onChange={handleChange} required />
           <TextField
             variant="outlined"
             label="Destination"
@@ -122,6 +123,7 @@ const CreateUpdateShipment: React.FC = () => {
             name="destination"
             value={form.destination}
             onChange={handleChange}
+            fullWidth
             required
           />
         </div>
@@ -133,6 +135,7 @@ const CreateUpdateShipment: React.FC = () => {
             value={form.currentStatus}
             options={shipmentStatusOptions}
             onChange={handleSelectChange}
+            fullWidth
             required
           />
         </div>
@@ -143,55 +146,67 @@ const CreateUpdateShipment: React.FC = () => {
             label="Estimated Delivery Date"
             name="estimatedDeliveryDate"
             date={form.estimatedDeliveryDate}
+            fullWidth
             onChange={handleDateChange}
           />
         </div>
-        <TextField
-          variant="outlined"
-          label="Container Numbers"
-          type="text"
-          name="containerNumbers"
-          value={form?.containerNumbers?.join(', ') ?? ''}
-          onChange={(e) => setForm({ ...form, containerNumbers: e.target.value.split(', ') })}
-          required
-        />
-        <TextField
-          variant="outlined"
-          label="Cargo Description"
-          type="text"
-          name="description"
-          value={form?.cargoDetails?.description}
-          onChange={handleCargoDetailsChange}
-          required
-        />
-        <TextField
-          variant="outlined"
-          label="Cargo weight in KGs"
-          type="num"
-          name="weight"
-          value={form?.cargoDetails?.weight}
-          onChange={handleCargoDetailsChange}
-          required
-        />
-        <TextField
-          variant="outlined"
-          label="Cargo volume in cubic"
-          type="num"
-          name="volume"
-          value={form?.cargoDetails?.volume}
-          onChange={handleCargoDetailsChange}
-          required
-        />
-        <TextField
-          variant="outlined"
-          label="Shipping Agent"
-          type="text"
-          name="shippingAgent"
-          value={form.shippingAgent}
-          onChange={handleChange}
-          required
-        />
-        <Button type="submit" className="mt-4 self-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <TextField
+            variant="outlined"
+            label="Container Numbers"
+            type="text"
+            name="containerNumbers"
+            value={form?.containerNumbers?.join(', ') ?? ''}
+            onChange={(e) => setForm((prev) => ({ ...prev, containerNumbers: e.target.value.split(', ') }))}
+            fullWidth
+            required
+          />
+          <TextField
+            variant="outlined"
+            label="Cargo Description"
+            type="text"
+            name="description"
+            value={form?.cargoDetails?.description}
+            onChange={handleCargoDetailsChange}
+            required
+            fullWidth
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <TextField
+            variant="outlined"
+            label="Cargo weight in KGs"
+            type="num"
+            name="weight"
+            value={form?.cargoDetails?.weight}
+            onChange={handleCargoDetailsChange}
+            required
+            fullWidth
+          />
+          <TextField
+            variant="outlined"
+            label="Cargo volume in cubic"
+            type="num"
+            name="volume"
+            value={form?.cargoDetails?.volume}
+            onChange={handleCargoDetailsChange}
+            required
+            fullWidth
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <TextField
+            variant="outlined"
+            label="Shipping Agent"
+            type="text"
+            name="shippingAgent"
+            value={form.shippingAgent}
+            onChange={handleChange}
+            required
+            fullWidth
+          />
+        </div>
+        <Button isLoading={isLoading} type="submit" className="mt-4 self-start">
           {id ? 'Update Shipment' : 'Create Shipment'}
         </Button>
       </form>

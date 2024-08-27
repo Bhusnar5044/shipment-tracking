@@ -34,3 +34,5 @@ export type ShipmentStatus = 'Pending' | 'In Transit' | 'Arrived' | 'Delivered' 
 export type UnknownObject = {
   [key: string]: any;
 };
+
+export type ResponseMessage = { message: string };

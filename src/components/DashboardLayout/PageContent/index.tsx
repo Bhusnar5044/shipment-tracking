@@ -3,6 +3,7 @@ import { memo } from 'react';
 
 import { cn } from '@/utils';
 
+import { Toaster } from 'react-hot-toast';
 import type { Props } from './types';
 
 const PageContent: React.FC<Props> = memo(({ children, isPaddingDisabled, className }) => (
@@ -16,6 +17,7 @@ const PageContent: React.FC<Props> = memo(({ children, isPaddingDisabled, classN
     )}
   >
     <div className="hideScrollbar h-[calc(100vh-3rem)] overflow-y-auto">{children}</div>
+    <Toaster />
   </main>
 ));
 
