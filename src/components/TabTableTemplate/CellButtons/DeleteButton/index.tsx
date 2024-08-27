@@ -12,15 +12,15 @@ export const DeleteButton: FC<Props> = memo(({ data }) => {
   const [deleteShipment, { isLoading }] = useDeleteShipmentMutation();
 
   const handleButtonClick = useCallback(async () => {
-    const response = await deleteShipment(data?._id ?? '');
+    const response = await deleteShipment({ _id: data?._id ?? '' });
     if (response) {
       toast('Shipment deleted successfully');
     }
   }, [data, deleteShipment]);
 
   return (
-    <Button variant="outline" isLoading={isLoading} onClick={handleButtonClick} className="size-[30px]">
-      <Icon iconName="trash" />
+    <Button variant="outline" isLoading={isLoading} onClick={handleButtonClick}>
+      <Icon iconName="delete" />
     </Button>
   );
 });

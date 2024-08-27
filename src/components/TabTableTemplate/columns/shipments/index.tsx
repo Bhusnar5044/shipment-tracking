@@ -2,6 +2,7 @@ import Chip from '@/components/common/Chip';
 import { ColumnTypes } from '@/components/common/DataTable/types';
 import { IShipment } from '@/store/services/shipmentApi/types';
 import { cn } from '@/utils';
+import { DeleteButton } from '../../CellButtons/DeleteButton';
 import ShowDetailsButton from '../../CellButtons/ShowDetailsButton';
 
 export function statusBackground(status: string) {
@@ -48,8 +49,9 @@ export const shipmentColumn: ColumnTypes<IShipment>[] = [
     header: 'action',
     enableHiding: false,
     cellComponent: ({ row }) => (
-      <div>
+      <div className="flex gap-3">
         <ShowDetailsButton data={row?.original} sidePanelKey={'shipment_content'} />
+        <DeleteButton data={row?.original} sidePanelKey={'shipment_content'} />
       </div>
     ),
   },

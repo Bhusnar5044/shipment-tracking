@@ -10,7 +10,6 @@ export const shipmentApi = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: '',
   }),
-  tagTypes: ['Post'],
   endpoints: (build) => ({
     getShipmentDetails: build.query<IShipment, { id: string }>({
       query: ({ id }) => {
@@ -35,7 +34,6 @@ export const shipmentApi = createApi({
         method: _id ? 'PUT' : 'POST',
         data: patch,
       }),
-      invalidatesTags: ['Post'],
     }),
     deleteShipment: build.mutation<IShipment, Pick<IShipment, '_id'>>({
       // note: an optional `queryFn` may be used in place of `query`
