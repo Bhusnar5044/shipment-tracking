@@ -10,7 +10,7 @@ const Header = () => {
   const { token } = getRoleAndPermissions();
 
   return (
-    <header className="fixed shadow w-full">
+    <header className="fixed shadow w-full z-10">
       <nav className="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800 lg:px-6">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between">
           <AncLink href="/" className="flex items-center">
