@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { keyPaths } from '@/constants/globalNavItems';
+import ContactPage from '@/pages/contactUs';
 import CreateUpdateShipmentPage from '@/pages/createUpdateShipment';
 import CustomerOnboarding from '@/pages/customerOnboarding';
 import DashboardPage from '@/pages/dashboard';
@@ -24,6 +25,10 @@ export const routes: Array<PathRouteProps> = [
   {
     path: '/signup',
     element: <Register />,
+  },
+  {
+    path: '/contact',
+    element: <ContactPage />,
   },
 ];
 
