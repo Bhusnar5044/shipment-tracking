@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api.example.com', // Replace with your API base URL
+  baseURL: '', // Replace with your API base URL
   headers: {
     'Content-Type': 'application/json',
     // Add any other headers or configurations you need

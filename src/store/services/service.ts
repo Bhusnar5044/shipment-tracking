@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 
@@ -22,12 +23,12 @@ export type Response<T = any> = {
 
 // api.js
 export const axiosBaseQuery =
-  ({ baseUrl } = { baseUrl: '' }) =>
+  (_: { baseUrl: string }) =>
   async ({ url, method, data, params, headers }: AxiosRequestConfig) => {
     const { token } = getRoleAndPermissions();
     try {
       const result = await axiosInstance({
-        url: baseUrl + url,
+        url: `${url}`,
         method,
         data,
         params,
