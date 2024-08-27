@@ -4,23 +4,27 @@ import Chip from '@/components/common/Chip';
 import Typography from '@/components/common/Typography';
 import { IShipment } from '@/store/services/shipmentApi/types';
 import { cn } from '@/utils';
+import { getRoleAndPermissions } from '@/utils/getRoleAndPermissions';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { statusBackground } from '../../columns/shipments';
 
 const ShipmentContent = memo(({ sidePanelData }: { sidePanelKey: string; sidePanelData: IShipment }) => {
+  const { userRole } = getRoleAndPermissions();
   return (
     <div className="p-8">
       <Typography variant="h3" className="mb-6">
         Shipment Details
       </Typography>
-      <div className="bg-blue-50 p-2 mb-3">
-        <Button className="self-end">
-          <Link to={`/dashboard/shipments/${sidePanelData._id}`} className="text-white">
-            Edit Shipment
-          </Link>
-        </Button>
-      </div>
+      {userRole !== 'Customer' && (
+        <div className="bg-blue-50 p-2 mb-3">
+          <Button className="self-end">
+            <Link to={`/dashboard/shipments/${sidePanelData._id}`} className="text-white">
+              Edit Shipment
+            </Link>
+          </Button>
+        </div>
+      )}
       <div className="flex justify-between mb-4">
         <Typography variant="h4">Status:</Typography>
         <Chip size="S" className={cn('capitalize', statusBackground(sidePanelData?.currentStatus))} label={sidePanelData?.currentStatus} />

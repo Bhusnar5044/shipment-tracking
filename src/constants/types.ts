@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { keyPaths } from './globalNavItems';
-import type { moduleRolePermissions } from './permissions';
 import { ListUrls } from './urls';
 
 export interface Option {
@@ -18,10 +17,6 @@ export interface FilterConfig {
   priority: number;
   isPrimary?: boolean;
 }
-
-export type ModuleRolePermissions = typeof moduleRolePermissions;
-
-export type ModuleRolePermissionsKeys = keyof typeof moduleRolePermissions;
 
 export type KeyPaths = typeof keyPaths;
 

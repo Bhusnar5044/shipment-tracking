@@ -32,29 +32,35 @@ export const routes: Array<PathRouteProps> = [
   },
 ];
 
-export const privateRoutes: Array<PathRouteProps> = [
+export const privateRoutes: Array<PathRouteProps & { permissions: string[] }> = [
   {
     path: keyPaths.dashboard,
     element: <DashboardPage />,
+    permissions: ['Manager', 'Admin'],
   },
   {
     path: keyPaths.trackShipments,
     element: <ShipmentTrackingPage />,
+    permissions: ['Manager', 'Customer', 'Admin'],
   },
   {
     path: keyPaths.shipments,
     element: <Shipments />,
+    permissions: ['Manager', 'Customer', 'Admin'],
   },
   {
     path: keyPaths.createShipment,
     element: <CreateUpdateShipmentPage />,
+    permissions: ['Manager', 'Admin'],
   },
   {
     path: keyPaths.updateShipment,
     element: <CreateUpdateShipmentPage />,
+    permissions: ['Manager', 'Admin'],
   },
   {
     path: keyPaths.customerManagement,
     element: <CustomerOnboarding />,
+    permissions: ['Manager', 'Admin'],
   },
 ];

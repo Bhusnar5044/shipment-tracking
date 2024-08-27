@@ -29,9 +29,13 @@ const Routings = () => {
           <Route path="*" element={<Page404 />} />
         </Route>
         <Route element={<DashboardLayout />}>
-          {privateRoutes.map(({ element, ...privateRouteProps }) => (
+          {privateRoutes.map(({ element, permissions, ...privateRouteProps }) => (
             <Route
-              element={<RequireAuth redirectTo={`/login?redirectTo=${privateRouteProps.path}`}>{element}</RequireAuth>}
+              element={
+                <RequireAuth permissions={permissions} redirectTo={`/login?redirectTo=${privateRouteProps.path}`}>
+                  {element}
+                </RequireAuth>
+              }
               {...privateRouteProps}
               key={`privateRoute-${privateRouteProps.path}`}
             />
