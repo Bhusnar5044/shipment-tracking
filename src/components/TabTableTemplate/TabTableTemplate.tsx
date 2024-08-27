@@ -116,8 +116,8 @@ export const TabTableTemplate: FC<Props> = memo(({ defaultTab, tabs, tabType, se
           pageSize={size}
           totalCount={data?.totalCount ?? 0}
           // onDownload={onDownload}
-          // disableDownload={!disableDownload}
           calcHeight={calcHeight}
+          disableDownload
         />
         <RightSidePanel isOpen={isOpen} onClose={onClose} sidePanelData={sidePanelData} sidePanelKey={sidePanelKey}>
           {SidePanelContent(sidePanelKey || (paramData.sidePanelParamKey as string), sidePanelData)}

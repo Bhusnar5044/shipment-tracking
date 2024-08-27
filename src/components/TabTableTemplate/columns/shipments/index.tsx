@@ -17,6 +17,10 @@ export function statusBackground(status: string) {
 
 export const shipmentColumn: ColumnTypes<IShipment>[] = [
   {
+    accessorKey: 'shipmentId',
+    header: 'shipment Id',
+  },
+  {
     accessorKey: 'trackingId',
     header: 'Tracking Id',
   },

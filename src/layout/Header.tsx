@@ -1,3 +1,4 @@
+import AncLink from '@/components/common/AncLink';
 import Button from '@/components/common/Button';
 import ThemeToggle from '@/components/theme-toggle';
 import { useAuth } from '@/context/AuthProvider';
@@ -9,15 +10,18 @@ const Header = () => {
   const { token } = getRoleAndPermissions();
 
   return (
-    <header>
+    <header className="fixed shadow w-full">
       <nav className="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800 lg:px-6">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between">
-          <a href="/" className="flex items-center">
-            <img src="/assets/logo.svg" className="mr-3 h-6 sm:h-9" alt="Logo" />
-          </a>
+          <AncLink href="/" className="flex items-center">
+            <img src="/assets/images/ShipmentTrackerLogo.svg" className="mr-3 h-12 sm:h-9 text-2xl" alt="Logo" />
+          </AncLink>
           <div className="flex items-center lg:order-2">
             {!token ? (
-              <Link to="/login" className="underline underline-offset-4 text-blue-500 hover:text-blue-800">
+              <Link
+                to="/login"
+                className="inline-flex items-center text-base font-medium text-purple-600 hover:text-purple-800 dark:text-purple-500 dark:hover:text-purple-700"
+              >
                 Log in / Register
               </Link>
             ) : (
@@ -54,13 +58,19 @@ const Header = () => {
             <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
               {token && (
                 <li>
-                  <Link to="/dashboard" className="underline underline-offset-4 text-blue-500 hover:text-blue-800">
+                  <Link
+                    to="/dashboard"
+                    className="inline-flex items-center text-base font-medium text-purple-600 hover:text-purple-800 dark:text-purple-500 dark:hover:text-purple-700"
+                  >
                     Dashboard
                   </Link>
                 </li>
               )}
               <li>
-                <Link to="/contact" className="underline underline-offset-4 text-blue-500 hover:text-blue-800">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center text-base font-medium text-purple-600 hover:text-purple-800 dark:text-purple-500 dark:hover:text-purple-700"
+                >
                   Contact
                 </Link>
               </li>

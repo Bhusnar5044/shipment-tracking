@@ -9,7 +9,7 @@ const Layout = () => {
       <Meta />
       <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900 dark:text-white">
         <Header />
-        <main className="max-w-screen-xl mx-auto">
+        <main className="max-w-screen-xl py-12 lg:py-0 mx-auto">
           <Outlet />
         </main>
         <Footer />

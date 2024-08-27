@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <a href="/" className="flex items-center">
-              <img src="/assets/logo.svg" className="me-3 h-8" alt="Logo" />
+              <img src="/assets/images/ShipmentTrackerLogo.svg" className="me-3 h-12" alt="Logo" />
             </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { urls } from '@/constants/urls';
 import { fetch } from '@/utils';
 
+import AncLink from '@/components/common/AncLink';
 import Button from '@/components/common/Button';
 import Checkbox from '@/components/common/Checkbox';
 import TextField from '@/components/common/TextField';
@@ -61,9 +62,9 @@ export const Login = () => {
   return (
     <section>
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
-        <a href="/" className="mb-6 flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
-          <img className="h-18 mr-2" src="/assets/logo.svg" alt="logo" />
-        </a>
+        <AncLink href="/" className="mb-6 flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
+          <img className="h-[8rem]" src="/assets/images/ShipmentTrackerLogo.svg" alt="logo" />
+        </AncLink>
         <div className="w-full rounded-lg bg-white shadow dark:border dark:border-gray-700 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
           <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
             <Typography variant="h2">Sign in to your account</Typography>
@@ -95,7 +96,10 @@ export const Login = () => {
               />
               <div className="flex items-center justify-between mb-3">
                 <Checkbox label="Remember me" name="remember" aria-describedby="remember" required />
-                <Link to="/forgot-password" className="underline underline-offset-4 text-blue-500 hover:text-blue-800">
+                <Link
+                  to="/forgot-password"
+                  className="inline-flex items-center text-base font-medium text-purple-600 hover:text-purple-800 dark:text-purple-500 dark:hover:text-purple-700"
+                >
                   Forgot password?
                 </Link>
               </div>
@@ -104,7 +108,10 @@ export const Login = () => {
               </Button>
               <Typography>
                 Don’t have an account yet?{' '}
-                <Link to="/signup" className="underline underline-offset-4 text-blue-500 hover:text-blue-800">
+                <Link
+                  to="/signup"
+                  className="inline-flex items-center text-base font-medium text-purple-600 hover:text-purple-800 dark:text-purple-500 dark:hover:text-purple-700"
+                >
                   Sign up
                 </Link>
               </Typography>
