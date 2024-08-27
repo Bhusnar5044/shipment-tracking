@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ListUrlsKeys } from '@/constants/types';
+import { useAuth } from '@/context/AuthProvider';
 import useQueryParams from '@/hooks/useQueryParams';
 import { useGetListQuery } from '@/store/services';
 import { dateFormatterForApi } from '@/utils';
@@ -11,15 +12,19 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
   const [filters, setFilters] = useState<any>({});
   const [filtersApplied, setFiltersApplied] = useState(false);
   const [showMoreFilters, setShowMoreFilters] = useState(false);
+  const { role = '', email = '' } = useAuth()?.user ?? {};
 
   const { queryParams, setQueryParams } = useQueryParams<queryParamsType>(),
     tab = queryParams?.get('tab') ?? defaultTab,
     page = +(queryParams?.get('page') ?? 1),
     size = +(queryParams?.get('size') ?? 10),
-    sort = queryParams?.get('sort'),
-    startDate = queryParams?.get('startDate'),
-    endDate = queryParams?.get('endDate'),
-    status = queryParams?.get('status');
+    sort = queryParams?.get('sort') ?? '',
+    startDate = queryParams?.get('startDate') ?? '',
+    endDate = queryParams?.get('endDate') ?? '',
+    status = queryParams?.get('status') ?? '',
+    shipmentId = queryParams?.get('shipmentId') ?? '',
+    origin = queryParams?.get('origin') ?? '',
+    destination = queryParams?.get('destination') ?? '';
 
   const queryProps = useMemo(() => {
     const filterProps = {
@@ -32,16 +37,19 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
     };
     setFilters({
       ...filterProps,
+      shipmentId,
+      origin,
+      destination,
     });
     return filtersQUeryProps;
-  }, [endDate, serviceApiKey, startDate]);
+  }, [destination, endDate, origin, serviceApiKey, shipmentId, startDate]);
 
   const { data, refetch } = useGetListQuery({
     page,
     size,
     sort,
     ...queryProps,
-    enabled: true,
+    ...(role === 'Customer' ? { customerId: email } : {}),
   });
 
   const handleTabChange = useCallback(
@@ -71,12 +79,14 @@ export const useContent = (serviceApiKey: ListUrlsKeys, defaultTab: string, tabT
     }
 
     setQueryParams(params);
-  }, [filters, setQueryParams]);
+    refetch();
+  }, [filters, refetch, setQueryParams]);
 
   const clearFilter = useCallback(() => {
     setQueryParams({});
     setFilters({});
-  }, [setQueryParams]);
+    refetch();
+  }, [refetch, setQueryParams]);
 
   const handleFilterChange = useCallback((key: string, value: any) => {
     setFilters((prevFilters: any) => ({

@@ -14,16 +14,9 @@ export const listApi = createApi({
   endpoints: (build) => ({
     getList: build.query<TableListDataType, TableListDataQueryTypes>({
       query: ({ key, size = 10, page = 1, ...props }) => {
-        // const resultKey = keyResultMapping[key] as TableDataListTypeKey;
-        const filteredProps: {
-          [key: string]: string | boolean | number | undefined | null;
-        } = {};
-        if (props[key] !== undefined && props[key] !== null) {
-          filteredProps[key] = props[key];
-        }
         return {
           url: ListUrls[key],
-          params: { page, size, ...filteredProps },
+          params: { page, size, ...props },
           method: 'GET',
         };
       },
