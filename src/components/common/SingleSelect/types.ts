@@ -50,4 +50,5 @@ export type SingleSelectProps = {
   className?: string;
   /** label Class */
   labelClass?: string;
+  id?: string;
 };

@@ -35,12 +35,12 @@ const SingleSelect: FC<SingleSelectProps> = memo(
     fullWidth,
     variant,
     className,
+    id,
     // labelClass,
   }) => {
     const [search, setSearch] = useState<string>(value);
     const [isOpen, setIsOpen] = useState(false);
     const [focus, setFocus] = useState(false);
-    const id = crypto.randomUUID();
     const savedOption = useRef<{ value: number | string; label: string }>({
       value: '',
       label: '',
