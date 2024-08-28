@@ -52,11 +52,12 @@ const Register: FC = () => {
     async (event: FormEvent) => {
       event.preventDefault();
       // used mock API fixed email pass
-      const { email, pass, conPass, role } = userInfo;
+      const { name, email, pass, conPass, role } = userInfo;
       if (pass === conPass) {
         const config = {
           url: urls.signup,
           data: {
+            name,
             email,
             password: pass,
             role,
