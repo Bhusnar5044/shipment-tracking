@@ -11,7 +11,7 @@ const AncLink: FC<AncLinkProps> = ({ href, children, target, className }) => (
       className
     )}
     href={href}
-    target={target ?? '_blank'}
+    {...(target ? { target } : {})}
   >
     {children}
   </a>
